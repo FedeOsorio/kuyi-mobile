@@ -1,75 +1,111 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import { StyleSheet, Text, View, Animated } from 'react-native';
+import { useRef } from 'react';
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+const HEADER_MAX_HEIGHT = 320; // Altura máxima del header
+const HEADER_MIN_HEIGHT = 120; // Al0tura mínima del header (la parte que quedará visible)
+const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
 
 export default function HomeScreen() {
+  const scrollY = useRef(new Animated.Value(0)).current;
+
+  const headerHeight = scrollY.interpolate({
+    inputRange: [0, HEADER_SCROLL_DISTANCE],
+    outputRange: [HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT],
+    extrapolate: 'clamp',
+  });
+
+  const imageTranslateY = scrollY.interpolate({
+    inputRange: [0, HEADER_SCROLL_DISTANCE],
+    outputRange: [0, -90],
+    extrapolate: 'clamp',
+  });
+
+  const imageScale = scrollY.interpolate({
+    inputRange: [0, HEADER_SCROLL_DISTANCE],
+    outputRange: [1, 0.3], // 1 = tamaño original, 0.8 = 80% al final
+    extrapolate: 'clamp'
+  });
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
+    <View style={{ flex: 1 }}>
+      <Animated.View style={{
+        height: headerHeight,
+        backgroundColor: '#fff7e4',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 10,
+        overflow: 'hidden',
+      }}>
+        <Animated.Image
+          source={require('@/assets/images/kuyiEssence.jpg')}
+          style={{ width: '100%', height: HEADER_MAX_HEIGHT, transform: [{ translateY: imageTranslateY }, { scale: imageScale }] }}
+          resizeMode="cover"
         />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+      </Animated.View>
+
+      <Animated.ScrollView
+        contentContainerStyle={{ height:1000, paddingTop: HEADER_MAX_HEIGHT, backgroundColor: '#fffaef' }}
+        onScroll={Animated.event(
+          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+          { useNativeDriver: false }
+        )}
+        scrollEventThrottle={16}
+      >
+        {/* Contenido de tu scroll */}
+        <View style={[styles.textContainer]}>
+          <Text>
+            Kumi Yuri Kumi Yuri
+            Kumi Yuri Kumi Yuri
+            Kumi Yuri Kumi Yuri
+            Kumi Yuri Kumi Yuri
+            Kumi Yuri Kumi Yuri
+            Kumi Yuri Kumi Yuri
+            Kumi Yuri Kumi Yuri
+            Kumi Yuri Kumi Yuri
+            Kumi Yuri Kumi Yuri
+            Kumi Yuri Kumi Yuri
+            Kumi Yuri Kumi Yuri
+            Kumi Yuri Kumi Yuri
+            Kumi Yuri Kumi Yuri
+            Kumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi Yuri
+          </Text>
+
+        </View>
+      </Animated.ScrollView>
+    </View >
   );
-}
+};
 
 const styles = StyleSheet.create({
+  mainContainer: {
+    height: 2000,
+  },
+  textContainer: {
+    padding: 12,
+    paddingHorizontal: 34,
+  },
   titleContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
+    gap: 4,
+  },
+  titleText: {
+    flex: 1,
+    margin: 0,
+    fontSize: 26,
+    padding: 0,
+    fontWeight: 500,
+    textAlign: 'center'
   },
   stepContainer: {
     gap: 8,
     marginBottom: 8,
   },
   reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+    height: 250,
+    width: '100%',
+    resizeMode: 'cover'
   },
 });
