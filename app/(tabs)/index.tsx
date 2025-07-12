@@ -1,7 +1,8 @@
 import { useRef } from 'react';
 import { Animated, StyleSheet, Text, View } from 'react-native';
+import Card from '@/components/Card';
 
-const HEADER_MAX_HEIGHT = 320; // Altura máxima del header
+const HEADER_MAX_HEIGHT = 290; // Altura máxima del header
 const HEADER_MIN_HEIGHT = 120; // Al0tura mínima del header (la parte que quedará visible)
 const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
 
@@ -16,13 +17,13 @@ export default function HomeScreen() {
 
   const imageTranslateY = scrollY.interpolate({
     inputRange: [0, HEADER_SCROLL_DISTANCE],
-    outputRange: [0, -90],
+    outputRange: [0, -80],
     extrapolate: 'clamp',
   });
 
   const imageScale = scrollY.interpolate({
     inputRange: [0, HEADER_SCROLL_DISTANCE],
-    outputRange: [1, 0.3], // 1 = tamaño original, 0.8 = 80% al final
+    outputRange: [0.7, 0.3], // 1 = tamaño original, 0.8 = 80% al final
     extrapolate: 'clamp'
   });
 
@@ -40,21 +41,38 @@ export default function HomeScreen() {
       }}>
         <Animated.Image
           source={require('@/assets/images/kuyiEssence.jpg')}
-          style={{ width: '100%', height: HEADER_MAX_HEIGHT, transform: [{ translateY: imageTranslateY }, { scale: imageScale }] }}
+          style={{ width: '100%', height: 300, transform: [{ translateY: imageTranslateY }, { scale: imageScale }] }}
           resizeMode="cover"
         />
       </Animated.View>
 
       <Animated.ScrollView
-        contentContainerStyle={{ height:1000, paddingTop: HEADER_MAX_HEIGHT, backgroundColor: '#fffaef' }}
+        contentContainerStyle={{ paddingTop: HEADER_MAX_HEIGHT, backgroundColor: '#fffaef' }}
         onScroll={Animated.event(
           [{ nativeEvent: { contentOffset: { y: scrollY } } }],
           { useNativeDriver: false }
         )}
         scrollEventThrottle={16}
       >
-        {/* Contenido de tu scroll */}
-        <View style={[styles.textContainer]}>
+        <View style={[styles.cardContainer]}>
+          <Card title={'Alimentación'} content={''}>
+
+          </Card>
+          <Card title={'Henos'} content={''}>
+
+          </Card>
+          <Card title={'Cuidados Generales'} content={'Vida diaria de los cobayitos.'}>
+            
+          </Card>
+          <Card title={'Razas'} content={''}>
+            
+          </Card>
+          <Card title={'Salud'} content={''}>
+            
+          </Card>
+          <Card title={'Recintos'} content={''}>
+
+          </Card>
           <Text>
             Kumi Yuri Kumi Yuri
             Kumi Yuri Kumi Yuri
@@ -81,6 +99,15 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   mainContainer: {
     height: 2000,
+  },
+  cardContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    padding: 20,
+    gap: 15,
+    paddingHorizontal: 30,
   },
   textContainer: {
     padding: 12,
