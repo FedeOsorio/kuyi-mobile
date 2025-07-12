@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, Animated } from 'react-native';
 import { useRef } from 'react';
+import { Animated, StyleSheet, Text, View } from 'react-native';
 
 const HEADER_MAX_HEIGHT = 320; // Altura máxima del header
 const HEADER_MIN_HEIGHT = 120; // Al0tura mínima del header (la parte que quedará visible)

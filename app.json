@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "KuYi-App",
-    "slug": "KuYi-App",
+    "name": "KuYi-app",
+    "slug": "KuYi-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
