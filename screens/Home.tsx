@@ -7,8 +7,8 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '@/App';
 
 
-const HEADER_MAX_HEIGHT = 290; // Altura máxima del header
-const HEADER_MIN_HEIGHT = 120; // Al0tura mínima del header (la parte que quedará visible)
+const HEADER_MAX_HEIGHT = 200; // Altura máxima del header
+const HEADER_MIN_HEIGHT = 105; // Al0tura mínima del header (la parte que quedará visible)
 const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
@@ -26,13 +26,13 @@ export default function Home() {
 
     const imageTranslateY = scrollY.interpolate({
         inputRange: [0, HEADER_SCROLL_DISTANCE],
-        outputRange: [0, -80],
+        outputRange: [0, -50],
         extrapolate: 'clamp',
     });
 
     const imageScale = scrollY.interpolate({
         inputRange: [0, HEADER_SCROLL_DISTANCE],
-        outputRange: [0.7, 0.3], // 1 = tamaño original, 0.8 = 80% al final
+        outputRange: [1.1, 0.55], // 1 = tamaño original, 0.8 = 80% al final
         extrapolate: 'clamp'
     });
 
@@ -51,8 +51,8 @@ export default function Home() {
                 }}>
                     <Animated.Image
                         source={require('@/assets/images/kuyiEssence.jpg')}
-                        style={{ width: '100%', height: 300, transform: [{ translateY: imageTranslateY }, { scale: imageScale }] }}
-                        resizeMode="cover"
+                        style={{ width: '100%', height: 200, transform: [{ translateY: imageTranslateY }, { scale: imageScale }] }}
+                        resizeMode="contain"
                     />
                 </Animated.View>
 
@@ -65,38 +65,33 @@ export default function Home() {
                     scrollEventThrottle={16}
                 >
                     <View style={[styles.cardContainer]}>
-                        <Card title={'Alimentación'} content={''} onPress={() => navigation.navigate('Alimentacion')}>
+                        <Card title={'Adopción'} content={''} imgBackground={require('@/assets/images/kuyiAdopt2.jpg')} onPress={() => navigation.navigate('Alimentacion')}>
 
                         </Card>
-                        <Card title={'Henos'} content={''} onPress={() => navigation.navigate('Hay')}>
+                        <Card title={'Alimentación'} content={''} imgBackground={require('@/assets/images/cuyiHeno.jpg')} onPress={() => navigation.navigate('Alimentacion')}>
 
                         </Card>
-                        <Card title={'Cuidados Generales'} content={''} onPress={() => navigation.navigate('Care')}>
+                        <Card title={'Henos'} content={''} imgBackground={require('@/assets/images/cuyiHeno.jpg')} onPress={() => navigation.navigate('Henos')}>
 
                         </Card>
-                        <Card title={'Razas'} content={''} onPress={() => navigation.navigate('care')}>
-                        </Card>
-                        <Card title={'Salud'} content={''} onPress={() => navigation.navigate('care')}>
+                        <Card title={'Cuidados\nGenerales'} content={''} imgBackground={require('@/assets/images/kuyiCare2.jpg')} onPress={() => navigation.navigate('Cuidados')}>
 
                         </Card>
-                        <Card title={'Recintos'} content={''} onPress={() => navigation.navigate('care')}>
+                        <Card title={'Razas'} content={''} imgBackground={require('@/assets/images/kuyiCobis.jpg')} onPress={() => navigation.navigate('Razas')}>
+                        </Card>
+                        <Card title={'Salud'} content={''} imgBackground={require('@/assets/images/kuyiHealth.jpg')} onPress={() => navigation.navigate('Salud')}>
 
                         </Card>
+                        <Card title={'Recintos'} content={''} imgBackground={require('@/assets/images/kuyiCage.jpg')} onPress={() => navigation.navigate('Recintos')}>
+
+                        </Card>
+                        <Card title={'Información\ny Contacto'} imgBackground={require('@/assets/images/kuyiInfo.jpg')} content={''} onPress={() => navigation.navigate('Recintos')}>
+
+                        </Card>
+                    </View>
+                    <View style={styles.textContainer}>
                         <Text>
-                            Kumi Yuri Kumi Yuri
-                            Kumi Yuri Kumi Yuri
-                            Kumi Yuri Kumi Yuri
-                            Kumi Yuri Kumi Yuri
-                            Kumi Yuri Kumi Yuri
-                            Kumi Yuri Kumi Yuri
-                            Kumi Yuri Kumi Yuri
-                            Kumi Yuri Kumi Yuri
-                            Kumi Yuri Kumi Yuri
-                            Kumi Yuri Kumi Yuri
-                            Kumi Yuri Kumi Yuri
-                            Kumi Yuri Kumi Yuri
-                            Kumi Yuri Kumi Yuri
-                            Kumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi YuriKumi Yuri Kumi Yuri
+
                         </Text>
 
                     </View>
@@ -115,14 +110,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         flexDirection: 'row',
         flexWrap: 'wrap',
-        padding: 20,
-        gap: 35,
-        paddingHorizontal: 30,
-        marginBottom: 60,
+        paddingVertical: 40,
+        gap: 30,
     },
     textContainer: {
-        padding: 12,
-        paddingHorizontal: 34,
+        padding: 10,
+        paddingHorizontal: 30,
         marginBottom: 20,
     },
     titleContainer: {

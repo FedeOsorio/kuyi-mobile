@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-export default function Care() {
+export default function Hay() {
   return (
     <View>
-      <Text>care</Text>
+      <Text>Hay</Text>
     </View>
   )
 }

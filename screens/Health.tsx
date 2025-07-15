@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-export default function Care() {
+export default function Health() {
   return (
     <View>
-      <Text>care</Text>
+      <Text>Health</Text>
     </View>
   )
 }
