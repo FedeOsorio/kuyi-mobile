@@ -65,13 +65,13 @@ export default function Home() {
                     scrollEventThrottle={16}
                 >
                     <View style={[styles.cardContainer]}>
-                        <Card title={'Adopción'} content={''} imgBackground={require('@/assets/images/kuyiAdopt2.jpg')} onPress={() => navigation.navigate('Alimentacion')}>
+                        <Card title={'Adopción'} content={''} imgBackground={require('@/assets/images/kuyiAdopt2.jpg')} onPress={() => navigation.navigate('Adopcion')}>
 
                         </Card>
                         <Card title={'Alimentación'} content={''} imgBackground={require('@/assets/images/cuyiHeno.jpg')} onPress={() => navigation.navigate('Alimentacion')}>
 
                         </Card>
-                        <Card title={'Henos'} content={''} imgBackground={require('@/assets/images/cuyiHeno.jpg')} onPress={() => navigation.navigate('Henos')}>
+                        <Card title={'Heno'} content={''} imgBackground={require('@/assets/images/cuyiHeno.jpg')} onPress={() => navigation.navigate('Henos')}>
 
                         </Card>
                         <Card title={'Cuidados\nGenerales'} content={''} imgBackground={require('@/assets/images/kuyiCare2.jpg')} onPress={() => navigation.navigate('Cuidados')}>
@@ -102,9 +102,6 @@ export default function Home() {
 };
 
 const styles = StyleSheet.create({
-    mainContainer: {
-        height: 2000,
-    },
     cardContainer: {
         flex: 1,
         justifyContent: 'center',

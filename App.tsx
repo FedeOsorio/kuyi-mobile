@@ -13,6 +13,7 @@ import Cobis from './screens/Cobis';
 import Health from './screens/Health';
 import Hay from './screens/Hay';
 import Cage from './screens/Cage';
+import Adopt from './screens/Adopt';
 
 export type RootStackParamList = {
   Home: undefined;
@@ -22,6 +23,7 @@ export type RootStackParamList = {
   Recintos: undefined;
   Cuidados: undefined;
   Razas: undefined;
+  Adopcion: undefined;
 };
 
 enableScreens();
@@ -43,6 +45,7 @@ export default function App() {
           }}
         >
           <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Adopcion" component={Adopt} />
           <Stack.Screen name="Alimentacion" component={Food} />
           <Stack.Screen name="Henos" component={Hay} />
           <Stack.Screen name="Cuidados" component={Care} />
