@@ -93,7 +93,7 @@ const ListHeader = () => (
 export default function Food() {
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: '#fffaef' }}>
-            <HeaderComponent></HeaderComponent>
+            <HeaderComponent title='Alimentación' />
             <FlatList
                 data={data}
                 keyExtractor={(item) => item.id}

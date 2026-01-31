@@ -3,7 +3,7 @@
     "name": "KuYiApp",
     "slug": "KuYiApp",
     "version": "1.0.0",
-    "orientation": "portrait",  
+    "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
@@ -20,7 +20,8 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.anonymous.KuYiApp"
     },
     "web": {
       "favicon": "./assets/favicon.png",

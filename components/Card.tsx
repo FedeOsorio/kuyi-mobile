@@ -1,63 +1,114 @@
-import { ImageBackground, ImageSource } from "expo-image";
-import { View, Text, StyleSheet, ImageSourcePropType } from "react-native"
-import { Pressable } from "react-native";
+import { ImageBackground } from "expo-image"
+import { View, Text, StyleSheet, Pressable, Dimensions } from "react-native"
+import { LinearGradient } from 'expo-linear-gradient'
+
+const { width: SCREEN_WIDTH } = Dimensions.get('window')
+const CARD_MARGIN = 12
+const CARD_WIDTH = (SCREEN_WIDTH - (CARD_MARGIN * 2 + 26)) / 2 // 32 = padding horizontal del grid
 
 type Props = {
-    title: string;
-    content: string;
-    onPress?: () => void;
-    imgBackground: ImageSource;
+    title: string
+    content: string
+    onPress?: () => void
+    imgBackground: any
+    icon?: string
 }
 
-const Card = ({ title, content, onPress, imgBackground }: Props) => {
+const Card = ({ title, content, onPress, imgBackground, icon }: Props) => {
     return (
-        <Pressable onPress={onPress}>
+        <Pressable 
+            onPress={onPress}
+            style={styles.cardWrapper}
+        >
             <View style={styles.card}>
                 <ImageBackground
                     source={imgBackground}
                     style={styles.cardBackground}
                     contentFit="cover"
                 >
+                    {/* Gradiente oscuro para mejorar legibilidad del texto */}
+                    <LinearGradient
+                        colors={['transparent', 'rgba(0,0,0,0.7)']}
+                        style={styles.gradient}
+                    />
                 </ImageBackground>
-                <Text style={styles.cardContent}>{content}</Text>
-                <Text style={styles.cardTitle}>{title}</Text>
+                
+                {/* Icono emoji si se proporciona */}
+                {icon && (
+                    <Text style={styles.cardIcon}>{icon}</Text>
+                )}
+                
+                <View style={styles.cardContent}>
+                    <Text style={styles.cardTitle}>{title}</Text>
+                    {content ? (
+                        <Text style={styles.cardSubtitle}>{content}</Text>
+                    ) : null}
+                </View>
             </View>
-        </Pressable >
+        </Pressable>
     )
 }
 
 const styles = StyleSheet.create({
+    cardWrapper: {
+        width: CARD_WIDTH,
+        marginBottom: CARD_MARGIN,
+    },
     card: {
-        width: 165,
-        height: 98,
-        backgroundColor: '#eee',
-        borderRadius: 15,
-        elevation: 4,
+        height: SCREEN_WIDTH < 360 ? 100 : 120, // Más chicas en pantallas pequeñas
+        backgroundColor: '#fff',
+        borderRadius: 20,
+        overflow: 'hidden',
+        elevation: 6,
         shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.4,
-        shadowRadius: 5,
+        shadowOffset: { width: 0, height: 3 },
+        shadowOpacity: 0.15,
+        shadowRadius: 8,
+    },
+    cardPressed: {
+        opacity: 0.9,
+        transform: [{ scale: 0.98 }],
     },
     cardBackground: {
         flex: 1,
-        borderRadius: 15,
-        overflow: 'hidden',
-        opacity: 0.85,
+        width: '100%',
+        height: '100%',
     },
-    cardTitle: {
-        fontSize: 14,
+    gradient: {
         position: 'absolute',
-        bottom: 24,
-        left: 10,
-        textShadowColor: 'white',
-        textShadowOffset: { width: .5, height: 0 },
-        textShadowRadius: 2,
-        fontWeight: 600,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        height: '70%',
+    },
+    cardIcon: {
+        position: 'absolute',
+        top: 12,
+        right: 12,
+        fontSize: 28,
     },
     cardContent: {
         position: 'absolute',
-        fontSize: 12
+        bottom: 0,
+        left: 0,
+        right: 0,
+        padding: 12,
     },
-});
+    cardTitle: {
+        fontSize: SCREEN_WIDTH < 360 ? 14 : 16,
+        fontWeight: '700',
+        color: '#fff',
+        textShadowColor: 'rgba(0, 0, 0, 0.8)',
+        textShadowOffset: { width: 0, height: 1 },
+        textShadowRadius: 3,
+        lineHeight: 20,
+    },
+    cardSubtitle: {
+        fontSize: SCREEN_WIDTH < 360 ? 10 : 11,
+        color: '#fff',
+        marginTop: 2,
+        opacity: 0.9,
+    },
+})
 
-export default Card;
+export default Card
