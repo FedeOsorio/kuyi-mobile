@@ -1,11 +1,10 @@
 import { StyleSheet, Text, View } from 'react-native'
 import { Image } from 'expo-image'
-import { SharedElement } from 'react-navigation-shared-element'
 
 export default function HeaderComponent({ title }: { title?: string }) {
     return (
         <View style={styles.container}>
-            <SharedElement id="logo-kuyi" style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Image
                     source={require('@/assets/images/kuyiEssence.jpg')}
                     style={styles.logoChico}
@@ -18,7 +17,7 @@ export default function HeaderComponent({ title }: { title?: string }) {
                         </Text>
                     )}
                 </View>
-            </SharedElement>
+            </View>
         </View>
     )
 }

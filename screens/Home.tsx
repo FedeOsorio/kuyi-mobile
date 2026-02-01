@@ -5,7 +5,6 @@ import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '@/App';
-import { SharedElement } from 'react-navigation-shared-element';
 
 const HEADER_MAX_HEIGHT = 160;
 const HEADER_MIN_HEIGHT = 80;
@@ -37,13 +36,11 @@ export default function Home() {
                     <Animated.View style={{ 
                         transform: [{ scale: logoScale }]
                     }}>
-                        <SharedElement id="logo-kuyi">
-                            <Image
-                                source={require('@/assets/images/kuyiEssence.jpg')}
-                                style={styles.logo}
-                                resizeMode="contain"
-                            />
-                        </SharedElement>
+                        <Image
+                            source={require('@/assets/images/kuyiEssence.jpg')}
+                            style={styles.logo}
+                            resizeMode="contain"
+                        />
                     </Animated.View>
                 </Animated.View>
                
