@@ -13,13 +13,13 @@ type DonationButton = {
 }
 
 const donationOptions: DonationButton[] = [
+   {
+    platform: 'Sitio Web',
+    icon: '🌐',
+    url: 'https://fedeosorio.github.io/kuyi-app/', // Reemplazar con tu usuario
+    color: ['#0070BA', '#1546A0'] as const
+  },
 /*   {
-    platform: 'Cafecito',
-    icon: '☕',
-    url: 'https://cafecito.app/tuusuario', // Reemplazar con tu usuario
-    color: ['#FF6B35', '#F7931E'] as const
-  }, */
-  {
     platform: 'Mercado Pago',
     icon: '💳',
     url: 'https://link.mercadopago.com.ar/kuyi', // Reemplazar con tu link
@@ -30,7 +30,7 @@ const donationOptions: DonationButton[] = [
     icon: '🌐',
     url: 'https://paypal.me/osoriofederico', // Reemplazar con tu usuario
     color: ['#0070BA', '#1546A0'] as const
-  }
+  } */
 ]
 
 export default function Info() {
@@ -89,6 +89,7 @@ export default function Info() {
               {'\n'}Si te resulta útil y querés apoyar el desarrollo y mantenimiento de la app, podés realizar una donación.
               {'\n'}¡Cada aporte ayuda a seguir mejorandola! 💛
               {'\n\n'}¡Como agradecimiento a cada donación mi idea es implementar una sección en la cual las fotos de sus Cobis puedan ser parte de la app!
+              {'\n\n'}¡Si realizaste una, te pido por favor que me avises por correo con el botón que está más abajo!
             </Text>
           </View>
 
