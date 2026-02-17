@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "KuYiApp",
+    "name": "KuYi App",
     "slug": "KuYiApp",
     "version": "0.1.0",
     "orientation": "portrait",
@@ -33,7 +33,6 @@
     },
     "extra": {
       "eas": {
-        "projectId": "d9f4a13e-f66d-4f15-bb18-c446b04eb0d9"
       }
     },
     "plugins": [
@@ -44,6 +43,7 @@
     },
     "runtimeVersion": {
       "policy": "appVersion"
-    }
+    },
+    "owner": "fedeosorio24"
   }
 }
