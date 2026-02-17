@@ -95,7 +95,7 @@ export default function Cobis() {
                     </View>
 
                     <View style={styles.infoRow}>
-                      <Text style={styles.infoLabel}>Origen:</Text>
+                      <Text style={styles.infoLabel}>Ubicación:</Text>
                       <Text style={styles.infoValue}>{selectedBreed.location}</Text>
                     </View>
 
