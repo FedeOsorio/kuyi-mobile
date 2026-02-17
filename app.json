@@ -21,7 +21,7 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.anonymous.KuYiApp"
+      "package": "com.fedeosorio.KuYiApp"
     },
     "web": {
       "favicon": "./assets/favicon.png",
@@ -38,6 +38,12 @@
     },
     "plugins": [
       "expo-font"
-    ]
+    ],
+    "updates": {
+      "url": "https://u.expo.dev/d9f4a13e-f66d-4f15-bb18-c446b04eb0d9"
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    }
   }
 }
