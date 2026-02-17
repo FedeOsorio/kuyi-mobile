@@ -169,11 +169,15 @@ const styles = StyleSheet.create({
   sectionIcon: {
     fontSize: 24,
     marginRight: 8,
+    lineHeight: 24,
+    textAlignVertical: 'center',
   },
   sectionTitle: {
     fontFamily: 'Poppins_600SemiBold',
     fontSize: 17,
     color: '#78350f',
+    lineHeight: 24,
+    textAlignVertical: 'center',
   },
   card: {
     backgroundColor: '#fff',
@@ -230,15 +234,20 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingVertical: 16,
     paddingHorizontal: 20,
+    minHeight: 60,
   },
   donationIcon: {
     fontSize: 24,
     marginRight: 12,
+    lineHeight: 24,
+    textAlignVertical: 'center',
   },
   donationText: {
     fontSize: 17,
     fontFamily: 'Poppins_500Medium',
-    color: '#fff'
+    color: '#fff',
+    lineHeight: 24,
+    textAlignVertical: 'center',
   },
   contactButton: {
     backgroundColor: '#fef3c7',
