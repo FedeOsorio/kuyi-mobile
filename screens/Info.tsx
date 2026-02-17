@@ -170,8 +170,8 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   sectionTitle: {
-    fontSize: 20,
-    fontWeight: '800',
+    fontFamily: 'Poppins_600SemiBold',
+    fontSize: 17,
     color: '#78350f',
   },
   card: {
@@ -186,23 +186,24 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
   },
   paragraph: {
-    fontSize: 15,
+    fontSize: 12,
+    fontFamily: 'Poppins_400Regular',
     color: '#451a03',
     lineHeight: 22
   },
   highlightText: {
-    fontSize: 15,
+    fontSize: 12,
+    fontFamily: 'Poppins_500Medium',
     color: '#78350f',
     lineHeight: 22,
-    fontWeight: '600',
     fontStyle: 'italic',
   },
     highlightBoldText: {
+    fontFamily: 'Poppins_600SemiBold',
     fontSize: 18,
     textAlign: 'center',
     color: '#78350f',
     lineHeight: 22,
-    fontWeight: '600',
   },
   kumiYuriImage: {
     width: '100%',
@@ -235,7 +236,7 @@ const styles = StyleSheet.create({
   },
   donationText: {
     fontSize: 17,
-    fontWeight: '700',
+    fontFamily: 'Poppins_500Medium',
     color: '#fff'
   },
   contactButton: {
@@ -248,8 +249,8 @@ const styles = StyleSheet.create({
     borderColor: '#fde68a',
   },
   contactButtonText: {
-    fontSize: 16,
-    fontWeight: '700',
+    fontSize: 13,
+    fontFamily: 'Poppins_500Medium',
     color: '#78350f',
     textAlign: 'center',
   },
@@ -261,12 +262,14 @@ const styles = StyleSheet.create({
     borderTopColor: '#fde68a',
   },
   footerText: {
-    fontSize: 14,
+    fontFamily: 'Poppins_400Regular',
+    fontSize: 12,
     color: '#92400e',
     marginBottom: 4,
   },
   versionText: {
     fontSize: 12,
+    fontFamily: 'Poppins_400Regular',
     color: '#92400e',
     opacity: 0.7,
   },

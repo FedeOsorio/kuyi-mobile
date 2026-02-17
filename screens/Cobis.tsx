@@ -134,8 +134,8 @@ const styles = StyleSheet.create({
     overflow: 'hidden'
   },
   header: {
-    fontSize: 24,
-    fontWeight: '700',
+    fontFamily: 'Poppins_600SemiBold',
+    fontSize: 17,
     padding: 16,
     paddingBottom: 8,
     color: '#78350f'
@@ -166,20 +166,19 @@ const styles = StyleSheet.create({
     backgroundColor: '#fef3c7'
   },
   cardText: {
-    padding: 12
+    padding: 10
   },
   cardTitle: {
-    fontSize: 15,
-    fontWeight: '700',
+    fontFamily: 'Poppins_600SemiBold',
+    fontSize: 13,
     color: '#78350f'
   },
   cardSubtitle: {
-    marginTop: 4,
-    fontSize: 12,
+    fontFamily: 'Poppins_400Regular',
+    fontSize: 11,
     color: '#92400e'
   },
 
-  // Modal styles
   modalOverlay: {
     flex: 1,
     justifyContent: 'flex-end',
@@ -211,8 +210,8 @@ const styles = StyleSheet.create({
     padding: 20
   },
   modalTitle: {
+    fontFamily: 'Poppins_600SemiBold',
     fontSize: 26,
-    fontWeight: '800',
     marginBottom: 16,
     color: '#78350f'
   },
@@ -220,13 +219,14 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   infoLabel: {
-    fontSize: 13,
-    fontWeight: '600',
+    fontFamily: 'Poppins_500Medium',
+    fontSize: 14,
     color: '#92400e',
     marginBottom: 2
   },
   infoValue: {
-    fontSize: 15,
+    fontFamily: 'Poppins_400Regular',
+    fontSize: 12,
     color: '#451a03',
     lineHeight: 20
   },
@@ -236,13 +236,14 @@ const styles = StyleSheet.create({
     marginVertical: 16
   },
   descriptionTitle: {
-    fontSize: 15,
-    fontWeight: '700',
+    fontFamily: 'Poppins_600SemiBold',
+    fontSize: 14,
     color: '#92400e',
     marginBottom: 8
   },
   modalDescription: {
-    fontSize: 15,
+    fontFamily: 'Poppins_400Regular',
+    fontSize: 12,
     color: '#451a03',
     lineHeight: 22
   },
@@ -254,8 +255,8 @@ const styles = StyleSheet.create({
     borderTopColor: '#fde68a'
   },
   closeButtonText: {
-    fontWeight: '700',
-    fontSize: 16,
+    fontFamily: 'Poppins_600SemiBold',
+    fontSize: 13,
     color: '#78350f'
   },
 })

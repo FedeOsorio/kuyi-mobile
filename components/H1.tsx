@@ -16,6 +16,6 @@ export default H1
 const styles = StyleSheet.create({
     h1: {
         fontSize: 22,
-        fontWeight: 'bold',
+        fontFamily: 'Poppins_600SemiBold',
     },
 })

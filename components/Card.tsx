@@ -26,14 +26,12 @@ const Card = ({ title, content, onPress, imgBackground, icon }: Props) => {
                     style={styles.cardBackground}
                     contentFit="cover"
                 >
-                    {/* Gradiente oscuro para mejorar legibilidad del texto */}
                     <LinearGradient
                         colors={['transparent', 'rgba(0,0,0,0.7)']}
                         style={styles.gradient}
                     />
                 </ImageBackground>
                 
-                {/* Icono emoji si se proporciona */}
                 {icon && (
                     <Text style={styles.cardIcon}>{icon}</Text>
                 )}
@@ -55,7 +53,7 @@ const styles = StyleSheet.create({
         marginBottom: CARD_MARGIN,
     },
     card: {
-        height: SCREEN_WIDTH < 360 ? 100 : 120, // Más chicas en pantallas pequeñas
+        height: SCREEN_WIDTH < 360 ? 100 : 120, 
         backgroundColor: '#fff',
         borderRadius: 20,
         overflow: 'hidden',
@@ -95,8 +93,8 @@ const styles = StyleSheet.create({
         padding: 12,
     },
     cardTitle: {
-        fontSize: SCREEN_WIDTH < 360 ? 14 : 16,
-        fontWeight: '700',
+        fontSize: SCREEN_WIDTH < 360 ? 14 : 14,
+        fontFamily: 'Poppins_600SemiBold',
         color: '#fff',
         textShadowColor: 'rgba(0, 0, 0, 0.8)',
         textShadowOffset: { width: 0, height: 1 },
@@ -104,9 +102,9 @@ const styles = StyleSheet.create({
         lineHeight: 20,
     },
     cardSubtitle: {
-        fontSize: SCREEN_WIDTH < 360 ? 10 : 11,
+        fontSize: SCREEN_WIDTH < 360 ? 10 : 9,
+        fontFamily: 'Poppins_400Regular',
         color: '#fff',
-        marginTop: 2,
         opacity: 0.9,
     },
 })

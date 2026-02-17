@@ -3,7 +3,6 @@ import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Image } from 'expo-image'
 import HeaderComponent from '@/components/Header'
-import H1 from '@/components/H1'
 import H2 from '@/components/H2'
 
 const data = [
@@ -99,7 +98,7 @@ export default function Hay() {
 const styles = StyleSheet.create({
   listPadding: { paddingHorizontal: 16, paddingBottom: 30 },
   headerContent: { paddingVertical: 10 },
-  sectionTitle: { marginTop: 18, marginBottom: 10, textAlign: 'left' },
+  sectionTitle: { fontFamily: 'Poppins_600SemiBold', fontSize: 17, color: '#78350f', marginTop: 18, marginBottom: 10, textAlign: 'left' },
   
   // Tarjeta Principal
   mainInfoCard: {
@@ -112,22 +111,24 @@ const styles = StyleSheet.create({
     elevation: 3,
     marginTop: 10
   },
-  mainText: { fontSize: 16, lineHeight: 24, color: '#333' },
-  highlight: { fontWeight: '700', color: '#795548' },
-  bold: { fontWeight: '700' },
+  mainText: { fontFamily: 'Poppins_400Regular', fontSize: 12, lineHeight: 22, color: '#333' },
+  highlight: { fontFamily: 'Poppins_600SemiBold', color: '#795548' },
+  bold: { fontFamily: 'Poppins_600SemiBold' },
   qualityBadge: {
     marginTop: 12,
     backgroundColor: '#f1f8e9',
     padding: 10,
     borderRadius: 12,
     borderLeftWidth: 4,
-    borderLeftColor: '#8bc34a'
+    borderLeftColor: '#8bc34a',
+    borderRightWidth: 4,
+    borderRightColor: '#8bc34a',
   },
-  qualityText: { fontSize: 14, color: '#33691e', fontStyle: 'italic' },
+  qualityText: { fontFamily: 'Poppins_400Regular', fontSize: 12, color: '#33691e', fontStyle: 'italic' },
 
   // Comparación
   comparisonCard: { paddingHorizontal: 5 },
-  paragraph: { fontSize: 15, color: '#555', lineHeight: 22 },
+  paragraph: { fontFamily: 'Poppins_400Regular', fontSize: 12, color: '#555', lineHeight: 22 },
 
   // Lista de Tipos
   typesContainer: { marginBottom: 10 },
@@ -139,8 +140,8 @@ const styles = StyleSheet.create({
     borderLeftWidth: 3,
     borderLeftColor: '#d7ccc8'
   },
-  typeTitle: { fontSize: 16, fontWeight: '700', color: '#5d4037', marginBottom: 4 },
-  typeDesc: { fontSize: 14, color: '#666', lineHeight: 20 },
+  typeTitle: { fontFamily: 'Poppins_600SemiBold', fontSize: 14, color: '#5d4037', marginBottom: 4 },
+  typeDesc: { fontFamily: 'Poppins_400Regular', fontSize: 12, color: '#666', lineHeight: 20 },
   warningBox: {
     marginTop: 8,
     padding: 10,
@@ -150,8 +151,6 @@ const styles = StyleSheet.create({
     borderColor: '#ffcdd2'
   },
   warningText: { fontSize: 13, color: '#b71c1c', lineHeight: 18 },
-
-  // Grid de Imágenes
   rowWrapper: { justifyContent: 'space-between' },
   card: {
     backgroundColor: '#fff',
@@ -166,7 +165,7 @@ const styles = StyleSheet.create({
   },
   image: { width: '100%', height: 110 },
   cardInfo: { padding: 10, alignItems: 'center' },
-  name: { fontSize: 12, fontWeight: '700', textAlign: 'center', color: '#333', marginBottom: 6 },
+  name: { fontFamily: 'Poppins_600SemiBold', fontSize: 13, textAlign: 'center', color: '#333', marginBottom: 6 },
   badge: { paddingHorizontal: 8, paddingVertical: 4, borderRadius: 8 },
-  badgeText: { fontSize: 10, fontWeight: '600' }
+  badgeText: { fontFamily: 'Poppins_500Medium', fontSize: 9 }
 });

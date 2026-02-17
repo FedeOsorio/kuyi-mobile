@@ -1,6 +1,15 @@
-import { FlatList, Modal, Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
-import NotFound from '@/components/NotFound'
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  TouchableOpacity,
+  Modal,
+  ScrollView,
+  Pressable,
+  Image,
+} from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import HeaderComponent from '@/components/Header'
 
@@ -8,10 +17,12 @@ type HealthIssue = {
   id: string
   name: string
   severity: 'high' | 'medium' | 'low'
+  images?: Array<string | number>
   symptoms: string[]
   immediateActions: string
   prevention: string
   category: string
+  visible?: boolean
 }
 
 const healthIssues: HealthIssue[] = [
@@ -20,22 +31,27 @@ const healthIssues: HealthIssue[] = [
     name: 'Pododermatitis (Pie inflamado)',
     severity: 'high',
     category: 'Infección',
+    visible: true,
+    images: [
+      require('@/assets/images/health/pododermatitis1.jpg'),
+      require('@/assets/images/health/pododermatitis2.jpg'),
+    ],
     symptoms: [
       'Inflamación en las patas',
       'Enrojecimiento',
       'Costras o llagas en las plantas',
-      'Cojera',
       'Dolor al caminar',
-      'Reluctancia a moverse'
     ],
-    immediateActions: 'COMPLETAR: Acciones inmediatas a realizar mientras se consigue turno veterinario',
-    prevention: 'Mantener jaula limpia, evitar fondos de alambre, controlar peso, usar camas suaves'
+    immediateActions: 'Mientras se consigue turno veterinario: Limpiar las patitas con toallita humeda, si tiene puede aplicar clorhexidina en spray, luego de esto también puede aplicar Milacrem en cada patita. La cantidad a aplicar de menos del tamaño de un grano de arroz, para formar una capa protectora.',
+    prevention: 'Mantener manta y jaula limpia, nunca usar jaulas de alambre, controlar sobrepeso, usar camas y mantas suaves.',
   },
   {
     id: 'resfrio',
     name: 'Resfriado / Infección Respiratoria',
     severity: 'high',
     category: 'Respiratorio',
+    visible: false,
+    images: ['https://example.com/placeholder1.jpg', 'https://example.com/placeholder2.jpg'],
     symptoms: [
       'Estornudos frecuentes',
       'Secreción nasal',
@@ -53,6 +69,8 @@ const healthIssues: HealthIssue[] = [
     name: 'Gases / Timpanismo',
     severity: 'high',
     category: 'Digestivo',
+    visible: false,
+    images: ['https://example.com/placeholder1.jpg', 'https://example.com/placeholder2.jpg'],
     symptoms: [
       'Abdomen hinchado y duro',
       'Dolor abdominal',
@@ -70,6 +88,8 @@ const healthIssues: HealthIssue[] = [
     name: 'Diarrea',
     severity: 'high',
     category: 'Digestivo',
+    visible: false,
+    images: ['https://example.com/placeholder1.jpg', 'https://example.com/placeholder2.jpg'],
     symptoms: [
       'Heces líquidas o muy blandas',
       'Zona anal sucia',
@@ -86,6 +106,8 @@ const healthIssues: HealthIssue[] = [
     name: 'Heces Pastosas / Cecotrofos Anormales',
     severity: 'medium',
     category: 'Digestivo',
+    visible: false,
+    images: ['https://example.com/placeholder1.jpg', 'https://example.com/placeholder2.jpg'],
     symptoms: [
       'Heces blandas pero formadas',
       'Cecotrofos no consumidos',
@@ -101,6 +123,8 @@ const healthIssues: HealthIssue[] = [
     name: 'Escorbuto (Déficit de Vitamina C)',
     severity: 'high',
     category: 'Nutricional',
+    visible: false,
+    images: ['https://example.com/placeholder1.jpg', 'https://example.com/placeholder2.jpg'],
     symptoms: [
       'Pérdida de apetito',
       'Encías sangrantes o hinchadas',
@@ -118,6 +142,8 @@ const healthIssues: HealthIssue[] = [
     name: 'Maloclusión Dental',
     severity: 'high',
     category: 'Dental',
+    visible: false,
+    images: ['https://example.com/placeholder1.jpg', 'https://example.com/placeholder2.jpg'],
     symptoms: [
       'Dificultad para comer',
       'Pérdida de peso',
@@ -134,6 +160,8 @@ const healthIssues: HealthIssue[] = [
     name: 'Cistitis / Infección Urinaria',
     severity: 'medium',
     category: 'Urinario',
+    visible: false,
+    images: ['https://example.com/placeholder1.jpg', 'https://example.com/placeholder2.jpg'],
     symptoms: [
       'Zona genital húmeda',
       'Orina con sangre',
@@ -150,6 +178,8 @@ const healthIssues: HealthIssue[] = [
     name: 'Cálculos Urinarios',
     severity: 'high',
     category: 'Urinario',
+    visible: false,
+    images: ['https://example.com/placeholder1.jpg', 'https://example.com/placeholder2.jpg'],
     symptoms: [
       'Sangre en orina',
       'Esfuerzo para orinar',
@@ -166,6 +196,8 @@ const healthIssues: HealthIssue[] = [
     name: 'Parásitos Externos (Ácaros, Piojos, Pulgas)',
     severity: 'medium',
     category: 'Parasitario',
+    visible: false,
+    images: ['https://example.com/placeholder1.jpg', 'https://example.com/placeholder2.jpg'],
     symptoms: [
       'Picazón intensa (peor de noche)',
       'Pérdida de pelo',
@@ -183,6 +215,8 @@ const healthIssues: HealthIssue[] = [
     name: 'Parásitos Internos (Tenias, Lombrices)',
     severity: 'medium',
     category: 'Parasitario',
+    visible: false,
+    images: ['https://example.com/placeholder1.jpg', 'https://example.com/placeholder2.jpg'],
     symptoms: [
       'Abdomen hinchado',
       'Gusanos visibles en heces',
@@ -199,6 +233,8 @@ const healthIssues: HealthIssue[] = [
     name: 'Hongos (Tiña)',
     severity: 'medium',
     category: 'Dermatológico',
+    visible: false,
+    images: ['https://example.com/placeholder1.jpg', 'https://example.com/placeholder2.jpg'],
     symptoms: [
       'Pérdida de pelo circular u ovalada',
       'Especialmente en cabeza',
@@ -215,6 +251,8 @@ const healthIssues: HealthIssue[] = [
     name: 'Golpe de Calor',
     severity: 'high',
     category: 'Emergencia',
+    visible: false,
+    images: ['https://example.com/placeholder1.jpg', 'https://example.com/placeholder2.jpg'],
     symptoms: [
       'Respiración rápida y superficial',
       'Salivación excesiva',
@@ -231,6 +269,8 @@ const healthIssues: HealthIssue[] = [
     name: 'Obesidad',
     severity: 'medium',
     category: 'Nutricional',
+    visible: false,
+    images: ['https://example.com/placeholder1.jpg', 'https://example.com/placeholder2.jpg'],
     symptoms: [
       'Peso superior a 1.5kg',
       'Dificultad para moverse',
@@ -247,6 +287,8 @@ const healthIssues: HealthIssue[] = [
     name: 'Abscesos',
     severity: 'high',
     category: 'Infección',
+    visible: false,
+    images: ['https://example.com/placeholder1.jpg', 'https://example.com/placeholder2.jpg'],
     symptoms: [
       'Bultos llenos de pus',
       'Hinchazón localizada',
@@ -263,6 +305,8 @@ const healthIssues: HealthIssue[] = [
     name: 'Conjuntivitis / Infección Ocular',
     severity: 'medium',
     category: 'Ocular',
+    visible: false,
+    images: ['https://example.com/placeholder1.jpg', 'https://example.com/placeholder2.jpg'],
     symptoms: [
       'Ojos rojos',
       'Secreción ocular',
@@ -279,6 +323,8 @@ const healthIssues: HealthIssue[] = [
     name: 'Estreñimiento',
     severity: 'medium',
     category: 'Digestivo',
+    visible: false,
+    images: ['https://example.com/placeholder1.jpg', 'https://example.com/placeholder2.jpg'],
     symptoms: [
       'Ausencia de heces',
       'Heces pequeñas y duras',
@@ -295,6 +341,8 @@ const healthIssues: HealthIssue[] = [
     name: 'Otitis / Infección de Oído',
     severity: 'high',
     category: 'Infección',
+    visible: false,
+    images: ['https://example.com/placeholder1.jpg', 'https://example.com/placeholder2.jpg'],
     symptoms: [
       'Inclinación de cabeza',
       'Pérdida de equilibrio',
@@ -307,6 +355,22 @@ const healthIssues: HealthIssue[] = [
     prevention: 'Mantener oídos limpios, evitar agua en los oídos, tratar infecciones respiratorias temprano, ambiente sin humedad excesiva'
   }
 ]
+
+/* Header component moved out of main function for reuse */
+const HealthHeader = () => (
+  <View style={styles.headerContainer}>
+    <Text style={styles.headerSubtitle}>
+      Guía de problemas comunes en cobayas y primeros auxilios
+    </Text>
+    <View style={styles.warningBox}>
+      <Text style={styles.warningText}>
+        ⚠️ Esta información NO reemplaza la consulta veterinaria. Ante
+        cualquier síntoma, contacta a tu veterinario de exóticos lo antes
+        posible.
+      </Text>
+    </View>
+  </View>
+)
 
 export default function Health() {
   const [selected, setSelected] = useState<string | null>(null)
@@ -367,119 +431,127 @@ export default function Health() {
     )
   }
 
-  const ListHeader = () => (
-    <View style={styles.headerContainer}>
-      <Text style={styles.headerSubtitle}>
-        - Guía de problemas comunes y primeros auxilios -
-      </Text>
-      <View style={styles.warningBox}>
-        <Text style={styles.warningText}>
-          ⚠️ Esta información NO reemplaza la consulta veterinaria. Ante
-          cualquier síntoma, debe ir a su veterinario de exóticos lo antes
-          posible.
-        </Text>
-      </View>
-    </View>
-  )
-
   const selectedIssue = healthIssues.find((h) => h.id === selected) || null
 
   return (
     <SafeAreaView style={styles.container}>
-      <HeaderComponent title="Enfermedades" />
+      <HeaderComponent title="Salud 🩺" />
       <FlatList
         data={healthIssues}
         renderItem={renderItem}
         keyExtractor={(i) => i.id}
         contentContainerStyle={styles.list}
         showsVerticalScrollIndicator={false}
-        ListHeaderComponent={ListHeader}
+        ListHeaderComponent={<HealthHeader />}
       />
 
-      <Modal
-        visible={!!selectedIssue}
-        animationType="slide"
-        transparent={true}
-        onRequestClose={() => setSelected(null)}
-      >
-        <View style={styles.modalOverlay}>
-          <Pressable
-            style={styles.modalBackdrop}
-            onPress={() => setSelected(null)}
-          />
+      {selectedIssue?.visible ? (
+        <Modal
+          visible={true}
+          animationType="slide"
+          transparent={true}
+          onRequestClose={() => setSelected(null)}
+        >
+          <View style={styles.modalOverlay}>
+            <Pressable
+              style={styles.modalBackdrop}
+              onPress={() => setSelected(null)}
+            />
 
-          <View style={styles.modalContainer}>
-            <ScrollView
-              contentContainerStyle={styles.modalScroll}
-              showsVerticalScrollIndicator={false}
-            >
-              {selectedIssue && (
-                <>
-                  <View style={styles.modalHeader}>
-                    <Text style={styles.modalTitle}>{selectedIssue.name}</Text>
-                    <View
-                      style={[
-                        styles.severityBadgeLarge,
-                        {
-                          backgroundColor: getSeverityColor(
-                            selectedIssue.severity
-                          ),
-                        },
-                      ]}
-                    >
-                      <Text style={styles.severityTextLarge}>
-                        {getSeverityText(selectedIssue.severity)}
-                      </Text>
-                    </View>
-                  </View>
-
-                  <View style={styles.modalContent}>
-                    <View style={styles.section}>
-                      <Text style={styles.sectionTitle}>
-                        🔍 Síntomas a observar
-                      </Text>
-                      {selectedIssue.symptoms.map((symptom, index) => (
-                        <Text key={index} style={styles.symptomItem}>
-                          • {symptom}
-                        </Text>
-                      ))}
-                    </View>
-
-                    <View style={styles.divider} />
-
-                    <View style={styles.section}>
-                      <Text style={styles.sectionTitle}>
-                        ⚡ Acciones Inmediatas
-                      </Text>
-                      <View style={styles.actionsBox}>
-                        <Text style={styles.actionsText}>
-                          {selectedIssue.immediateActions}
+            <View style={styles.modalContainer}>
+              <ScrollView
+                contentContainerStyle={styles.modalScroll}
+                showsVerticalScrollIndicator={false}
+              >
+                {selectedIssue && (
+                  <>
+                    <View style={styles.modalHeader}>
+                      <Text style={styles.modalTitle}>{selectedIssue.name}</Text>
+                      <View
+                        style={[
+                          styles.severityBadgeLarge,
+                          {
+                            backgroundColor: getSeverityColor(
+                              selectedIssue.severity
+                            ),
+                          },
+                        ]}
+                      >
+                        <Text style={styles.severityTextLarge}>
+                          {getSeverityText(selectedIssue.severity)}
                         </Text>
                       </View>
                     </View>
 
-                    <View style={styles.divider} />
+                    <View style={styles.modalContent}>
+                      <View style={styles.section}>
+                        <Text style={styles.sectionTitle}>
+                          🔍 Síntomas a observar
+                        </Text>
+                        {selectedIssue.symptoms.map((symptom, index) => (
+                          <Text key={index} style={styles.symptomItem}>
+                            • {symptom}
+                          </Text>
+                        ))}
+                      </View>
 
-                    <View style={styles.section}>
-                      <Text style={styles.sectionTitle}>🛡️ Prevención</Text>
-                      <Text style={styles.preventionText}>
-                        {selectedIssue.prevention}
-                      </Text>
+                      <View style={styles.divider} />
+
+                      <View style={styles.section}>
+                        <Text style={styles.sectionTitle}>
+                          ⚡ Acciones Inmediatas
+                        </Text>
+                        <View style={styles.actionsBox}>
+                          <Text style={styles.actionsText}>
+                            {selectedIssue.immediateActions}
+                          </Text>
+                        </View>
+                      </View>
+
+                      <View style={styles.divider} />
+                      <View style={styles.section}>
+                        <Text style={styles.sectionTitle}>🛡️ Prevención</Text>
+                        <Text style={styles.preventionText}>
+                          {selectedIssue.prevention}
+                        </Text>
+                      </View>
+
+                      <View style={styles.divider} />
+
+                      <Text style={styles.sectionTitle}>Imágenes</Text>
+                      <View style={styles.section}>
+                        {selectedIssue.images && selectedIssue.images.length > 0 && (
+                          <View style={styles.imagesContainer}>
+                            {selectedIssue.images.map((img, idx) => {
+                              const source =
+                                typeof img === 'string' ? { uri: img } : img
+                              return (
+                                <Image
+                                  key={idx}
+                                  source={source}
+                                  style={styles.issueImage}
+                                  resizeMode="cover"
+                                />
+                              )
+                            })}
+                          </View>
+                        )}
+                      </View>
                     </View>
-                  </View>
-                </>
-              )}
-            </ScrollView>
+                  </>
+                )}
+              </ScrollView>
 
-            <Pressable
-              style={styles.closeButton}
-              onPress={() => setSelected(null)}
-            >
-              <Text style={styles.closeButtonText}>Cerrar</Text>
-            </Pressable>
+              <Pressable
+                style={styles.closeButton}
+                onPress={() => setSelected(null)}
+              >
+                <Text style={styles.closeButtonText}>Cerrar</Text>
+              </Pressable>
+            </View>
           </View>
-        </View>
-      </Modal>
+        </Modal>
+      ) : null}
     </SafeAreaView>
   )
 }
@@ -491,18 +563,19 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     padding: 10,
+    paddingBottom: 8,
   },
   header: {
-    fontSize: 24,
-    fontWeight: '700',
+    fontFamily: 'Poppins_600SemiBold',
+    fontSize: 17,
     color: '#78350f',
     marginBottom: 4,
   },
   headerSubtitle: {
-    fontSize: 14,
+    fontFamily: 'Poppins_400Regular',
+    fontSize: 12,
     color: '#92400e',
-    marginBottom: 12,
-    textAlign: 'center',
+    marginBottom: 10,
   },
   warningBox: {
     backgroundColor: '#fef3c7',
@@ -510,9 +583,12 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     borderLeftWidth: 4,
     borderLeftColor: '#f59e0b',
+    borderRightColor: '#f59e0b',
+    borderRightWidth: 4,
   },
   warningText: {
-    fontSize: 13,
+    fontFamily: 'Poppins_400Regular',
+    fontSize: 12,
     color: '#78350f',
     lineHeight: 18,
   },
@@ -542,18 +618,19 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   cardTitle: {
-    fontSize: 16,
-    fontWeight: '700',
+    fontSize: 13,
+    fontFamily: 'Poppins_600SemiBold',
     color: '#78350f',
     marginBottom: 2,
   },
   cardCategory: {
-    fontSize: 12,
+    fontFamily: 'Poppins_500Medium',
+    fontSize: 14,
     color: '#92400e',
-    fontWeight: '500',
   },
   cardSubtitle: {
-    fontSize: 13,
+    fontSize: 12,
+    fontFamily: 'Poppins_400Regular',
     color: '#451a03',
     lineHeight: 18,
   },
@@ -564,8 +641,9 @@ const styles = StyleSheet.create({
   },
   severityText: {
     color: '#fff',
+    fontFamily: 'Poppins_500Medium',
     fontSize: 11,
-    fontWeight: '700',
+    lineHeight: 14,
   },
   severityBadgeLarge: {
     paddingHorizontal: 12,
@@ -574,8 +652,8 @@ const styles = StyleSheet.create({
   },
   severityTextLarge: {
     color: '#fff',
+    fontFamily: 'Poppins_600SemiBold',
     fontSize: 13,
-    fontWeight: '700',
   },
 
   // Modal styles
@@ -607,8 +685,8 @@ const styles = StyleSheet.create({
     paddingBottom: 16,
   },
   modalTitle: {
-    fontSize: 22,
-    fontWeight: '800',
+    fontSize: 18,
+    fontFamily: 'Poppins_600SemiBold',
     color: '#78350f',
     marginBottom: 8,
   },
@@ -616,16 +694,16 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   section: {
-    marginBottom: 16,
   },
   sectionTitle: {
-    fontSize: 17,
-    fontWeight: '700',
+    fontSize: 14,
+    fontFamily: 'Poppins_600SemiBold',
     color: '#78350f',
-    marginBottom: 12,
+    marginBottom: 5,
   },
   symptomItem: {
-    fontSize: 15,
+    fontSize: 12,
+    fontFamily: 'Poppins_400Regular',
     color: '#451a03',
     lineHeight: 24,
     marginBottom: 4,
@@ -636,17 +714,31 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     borderLeftWidth: 4,
     borderLeftColor: '#f59e0b',
+    borderRightWidth: 4,
+    borderRightColor: '#f59e0b',
   },
   actionsText: {
-    fontSize: 15,
+    fontSize: 12,
+    fontFamily: 'Poppins_400Regular',
     color: '#78350f',
     lineHeight: 22,
-    fontStyle: 'italic',
   },
   preventionText: {
-    fontSize: 15,
-    color: '#451a03',
+    fontSize: 12,
+    fontFamily: 'Poppins_400Regular',
+    color: '#6b5f59',
     lineHeight: 22,
+  },
+  imagesContainer: {
+    flexDirection: 'column',
+    gap: 12,
+    marginTop: 12,
+  },
+  issueImage: {
+    width: '100%',
+    height: 200,
+    borderRadius: 12,
+    backgroundColor: '#e5e7eb',
   },
   divider: {
     height: 1,
@@ -661,8 +753,8 @@ const styles = StyleSheet.create({
     borderTopColor: '#fde68a',
   },
   closeButtonText: {
-    fontWeight: '700',
-    fontSize: 16,
+    fontFamily: 'Poppins_600SemiBold',
+    fontSize: 15,
     color: '#78350f',
   },
 })

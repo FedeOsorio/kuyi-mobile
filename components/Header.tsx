@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.15,
         shadowRadius: 12,
         elevation: 8,
-        // Borde inferior sutil para más profundidad
         borderBottomWidth: 1,
         borderBottomColor: 'rgba(120, 53, 15, 0.1)',
     },
@@ -46,11 +45,11 @@ const styles = StyleSheet.create({
     title: {
         textAlign: 'center',
         fontSize: 22,
-        fontWeight: '800',
+        fontFamily: 'Poppins_600SemiBold',
         color: '#78350f',
         letterSpacing: 0.3,
         textShadowColor: 'rgba(0, 0, 0, 0.2)',
-        textShadowOffset: { width: 0, height: 2 },
+        textShadowOffset: { width: 0, height: 1 },
         textShadowRadius: 3,
     }
 })

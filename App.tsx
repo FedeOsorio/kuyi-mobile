@@ -4,6 +4,8 @@ import { StyleSheet } from 'react-native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { useFonts, Poppins_400Regular, Poppins_500Medium, Poppins_600SemiBold, Poppins_700Bold, Poppins_800ExtraBold } from '@expo-google-fonts/poppins'
+import * as SplashScreen from 'expo-splash-screen'
 
 import Home from '@/screens/Home'
 import Food from '@/screens/Food'
@@ -14,6 +16,7 @@ import Hay from '@/screens/Hay'
 import Cage from '@/screens/Cage'
 import Adopt from '@/screens/Adopt'
 import Info from '@/screens/Info'
+import { useEffect } from 'react'
 
 export type RootStackParamList = {
   Home: undefined
@@ -27,9 +30,30 @@ export type RootStackParamList = {
   Info: undefined
 }
 
+SplashScreen.preventAutoHideAsync()
+
+
 const Stack = createNativeStackNavigator<RootStackParamList>()
 
 export default function App() {
+  const [fontsLoaded, fontError] = useFonts({
+    Poppins_400Regular,
+    Poppins_500Medium,
+    Poppins_600SemiBold,
+    Poppins_700Bold,
+    Poppins_800ExtraBold,
+  })
+
+  useEffect(() => {
+    if (fontsLoaded || fontError) {
+      SplashScreen.hideAsync()
+    }
+  }, [fontsLoaded, fontError])
+
+  if (!fontsLoaded && !fontError) {
+    return null
+  }
+  
   return (
     <SafeAreaProvider>
       <NavigationContainer>

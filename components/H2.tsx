@@ -17,7 +17,7 @@ export default H2
 const styles = StyleSheet.create({
     h2: {
         marginVertical: 2,
-        fontSize: 18,
-        fontWeight: 'bold',
+        fontSize: 17,
+        fontFamily: 'Poppins_600SemiBold',
     },
 })
