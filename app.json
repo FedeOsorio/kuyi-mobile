@@ -33,6 +33,7 @@
     },
     "extra": {
       "eas": {
+        "projectId": "30a8fa55-b772-4837-9d71-bbdb8bdd9b47"
       }
     },
     "plugins": [
