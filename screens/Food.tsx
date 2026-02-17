@@ -290,8 +290,8 @@ const styles = StyleSheet.create({
   },
   foodCard: {
     backgroundColor: '#fff',
-    width: '48%',
-    marginBottom: 12,
+    width: '49%',
+    marginBottom: 10,
     borderRadius: 16,
     overflow: 'hidden',
     elevation: 2,
@@ -325,6 +325,7 @@ const styles = StyleSheet.create({
   },
   foodContent: {
     padding: 10,
+    paddingHorizontal: 12,
     alignItems: 'center',
   },
   foodName: {
@@ -335,11 +336,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   foodDescription: {
-    fontSize: 12,
+    fontSize: 11,
     fontFamily: 'Poppins_400Regular',
     color: '#451a03',
     lineHeight: 16,
-    textAlign: 'center',
+    textAlign: 'justify',
     marginTop: 6,
   },
 })

@@ -327,6 +327,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontFamily: 'Poppins_600SemiBold',
     fontSize: 13,
+    lineHeight: 16,
   },
 
   // Modal styles

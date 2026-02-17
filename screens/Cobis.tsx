@@ -178,7 +178,6 @@ const styles = StyleSheet.create({
     fontSize: 11,
     color: '#92400e'
   },
-
   modalOverlay: {
     flex: 1,
     justifyContent: 'flex-end',
@@ -199,7 +198,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   modalScroll: {
-    paddingBottom: 20
+    // padding: 20
   },
   modalImage: {
     width: '100%',
@@ -212,7 +211,7 @@ const styles = StyleSheet.create({
   modalTitle: {
     fontFamily: 'Poppins_600SemiBold',
     fontSize: 26,
-    marginBottom: 16,
+    marginBottom: 10,
     color: '#78350f'
   },
   infoRow: {
@@ -233,22 +232,21 @@ const styles = StyleSheet.create({
   divider: {
     height: 1,
     backgroundColor: '#fde68a',
-    marginVertical: 16
+    marginVertical: 10
   },
   descriptionTitle: {
     fontFamily: 'Poppins_600SemiBold',
     fontSize: 14,
     color: '#92400e',
-    marginBottom: 8
   },
   modalDescription: {
     fontFamily: 'Poppins_400Regular',
     fontSize: 12,
     color: '#451a03',
-    lineHeight: 22
+    lineHeight: 22,
   },
   closeButton: {
-    padding: 16,
+    padding: 14,
     backgroundColor: '#fef3c7',
     alignItems: 'center',
     borderTopWidth: 1,
