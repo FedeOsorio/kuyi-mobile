@@ -290,7 +290,8 @@ const styles = StyleSheet.create({
   },
   foodCard: {
     backgroundColor: '#fff',
-    width: '49%',
+    flex: 1,
+    maxWidth: '49%',
     marginBottom: 10,
     borderRadius: 16,
     overflow: 'hidden',

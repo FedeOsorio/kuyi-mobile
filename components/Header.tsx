@@ -10,7 +10,7 @@ export default function HeaderComponent({ title }: { title?: string }) {
                     style={styles.logoChico}
                     contentFit="contain"
                 />
-                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', minWidth: 0 }}>
                     {title && (
                         <Text style={styles.title} numberOfLines={1}>
                             {title}
