@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, ScrollView, Image, FlatList } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View, Image, FlatList, PixelRatio, AccessibilityInfo, AppState } from 'react-native'
+import React, { useState, useEffect } from 'react'
 import HeaderComponent from '@/components/Header'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
@@ -73,38 +73,64 @@ const getRecommendedColor = (level: string) => {
   }
 }
 
+function useFontScale() {
+  const [fontScale, setFontScale] = useState(() => PixelRatio.getFontScale())
+
+  useEffect(() => {
+    const refresh = () => setFontScale(PixelRatio.getFontScale())
+
+    // iOS: cambios de accesibilidad en tiempo real
+    const boldSub = AccessibilityInfo.addEventListener('boldTextChanged', refresh)
+    const motionSub = AccessibilityInfo.addEventListener('reduceMotionChanged', refresh)
+
+    // Android + iOS: cuando el usuario vuelve a la app después de cambiar
+    // ajustes del sistema (cubre el caso de font scale en Android)
+    const appStateSub = AppState.addEventListener('change', (state) => {
+      if (state === 'active') refresh()
+    })
+
+    return () => {
+      boldSub.remove()
+      motionSub.remove()
+      appStateSub.remove()
+    }
+  }, [])
+
+  return fontScale
+}
+
 const ListHeader = () => (
   <View>
-    <Image 
+    <Image
       source={require('@/assets/images/kuyiDiet.png')}
       style={styles.headerImage}
       resizeMode='cover'
     />
-    
+
     <View style={styles.introSection}>
       <Text style={styles.sectionTitle}>Consideración General</Text>
       <Text style={styles.paragraph}>
-        La alimentación de un Cobayo está compuesta 80% por heno de pastura, 
-        el cual es obligatorio en su dieta, 15% por verduras y frutas ocasionales, 
+        La alimentación de un Cobayo está compuesta 80% por heno de pastura,
+        el cual es obligatorio en su dieta, 15% por verduras y frutas ocasionales,
         y el 5% restante corresponde a pellets de alimento balanceado.
       </Text>
       <Text style={styles.paragraph}>
-        La dieta se ve ligeramente modificada según la edad del cobayito. A continuación 
-        encontrarás mayores detalles, consideraciones a tener en cuenta y todas las verduras 
+        La dieta se ve ligeramente modificada según la edad del cobayito. A continuación
+        encontrarás mayores detalles, consideraciones a tener en cuenta y todas las verduras
         tanto permitidas como prohibidas en la dieta de tu mascota.
       </Text>
     </View>
 
     <View style={styles.tipsSection}>
       <Text style={styles.sectionTitle}>Consejos para todas las edades</Text>
-      
+
       <View style={styles.tipBox}>
         <Text style={styles.tipIcon}>💊</Text>
         <View style={styles.tipContent}>
           <Text style={styles.tipTitle}>Vitamina C</Text>
           <Text style={styles.tipText}>
-            Las cobayas no pueden producir Vitamina C, la cual es muy importante en su 
-            metabolismo. Su dieta debe incluir fuentes ricas en esta vitamina como el 
+            Las cobayas no pueden producir Vitamina C, la cual es muy importante en su
+            metabolismo. Su dieta debe incluir fuentes ricas en esta vitamina como el
             morrón o suplementos específicos.
           </Text>
         </View>
@@ -115,7 +141,7 @@ const ListHeader = () => (
         <View style={styles.tipContent}>
           <Text style={styles.tipTitle}>Nunca ofrecer</Text>
           <Text style={styles.tipText}>
-            Papa, cebolla, ajo, repollo, pan, galletas, chocolate, carne, productos 
+            Papa, cebolla, ajo, repollo, pan, galletas, chocolate, carne, productos
             lácteos, ni alimentos con azúcar o sal.
           </Text>
         </View>
@@ -123,7 +149,7 @@ const ListHeader = () => (
 
       <View style={styles.noteBox}>
         <Text style={styles.noteText}>
-          Todos los vegetales deben darse crudos, lavados y secados. Es muy importante 
+          Todos los vegetales deben darse crudos, lavados y secados. Es muy importante
           quitarles las semillas ya que pueden causar daño en su aparato digestivo.
         </Text>
       </View>
@@ -132,7 +158,7 @@ const ListHeader = () => (
     <View style={styles.listTitleSection}>
       <Text style={styles.listTitle}>🥬 Hojas Verdes</Text>
       <Text style={styles.listSubtitle}>
-        Las lechugas no deben darse en tanta cantidad por su alto contenido en agua. 
+        Las lechugas no deben darse en tanta cantidad por su alto contenido en agua.
         Entre 1 a 2 hojas por cobaya por día es lo más recomendado.
       </Text>
     </View>
@@ -140,25 +166,35 @@ const ListHeader = () => (
 )
 
 export default function Food() {
+  const fontScale = useFontScale()
+  const isLargeFont = fontScale >= 1.3
+  const numColumns = isLargeFont ? 1 : 2
+
   const renderItem = ({ item }: { item: FoodItem }) => (
-    <View style={styles.foodCard}>
-      <View style={styles.imageContainer}>
-        <Image source={item.image} style={styles.foodImage} />
+    <View style={[styles.foodCard, isLargeFont && styles.foodCardLarge]}>
+      <View style={[styles.imageContainer, isLargeFont && styles.imageContainerLarge]}>
+        <Image
+          source={item.image}
+          style={[styles.foodImage, isLargeFont && styles.foodImageLarge]}
+        />
       </View>
-      
-      <View style={styles.foodContent}>
-        <Text style={styles.foodName} numberOfLines={2}>{item.name}</Text>
-        <View 
+
+      <View style={[styles.foodContent, isLargeFont && styles.foodContentLarge]}>
+        <Text style={styles.foodName}>{item.name}</Text>
+        <View
           style={[
-            styles.recommendedBadge, 
+            styles.recommendedBadge,
+            isLargeFont && styles.recommendedBadgeLarge,
             { backgroundColor: getRecommendedColor(item.recommended) }
           ]}
         >
-          <Text style={styles.recommendedText}>
+          <Text style={[styles.recommendedText, isLargeFont && styles.recommendedTextLarge]}>
             {item.description}
           </Text>
         </View>
-        <Text style={styles.foodDescription} numberOfLines={4}>{item.top}</Text>
+        <Text style={[styles.foodDescription, isLargeFont && styles.foodDescriptionLarge]}>
+          {item.top}
+        </Text>
       </View>
     </View>
   )
@@ -170,9 +206,12 @@ export default function Food() {
         data={data}
         keyExtractor={(item) => item.id}
         renderItem={renderItem}
-        numColumns={2}
+        // 'key' fuerza re-montaje del FlatList cuando numColumns cambia,
+        // evitando el error de React Native con columnas dinámicas.
+        key={numColumns}
+        numColumns={numColumns}
         contentContainerStyle={styles.listContent}
-        columnWrapperStyle={styles.columnWrapper}
+        columnWrapperStyle={numColumns === 2 ? styles.columnWrapper : undefined}
         ListHeaderComponent={<ListHeader />}
         showsVerticalScrollIndicator={false}
       />
@@ -288,6 +327,8 @@ const styles = StyleSheet.create({
     lineHeight: 18,
     textAlign: 'left',
   },
+
+  // ─── Card: modo 2 columnas (default) ───────────────────────────────────────
   foodCard: {
     backgroundColor: '#fff',
     flex: 1,
@@ -300,8 +341,6 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
-    minHeight: 0,
-    display: 'flex',
     flexDirection: 'column',
   },
   imageContainer: {
@@ -316,28 +355,12 @@ const styles = StyleSheet.create({
     borderRadius: 35,
     resizeMode: 'cover',
   },
-  recommendedBadge: {
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 12,
-    marginVertical: 4,
-    alignSelf: 'center',
-    minWidth: 0,
-  },
-  recommendedText: {
-    color: '#fff',
-    fontFamily: 'Poppins_500Medium',
-    fontSize: 9,
-    lineHeight: 14,
-    textAlign: 'center',
-  },
   foodContent: {
     flex: 1,
     padding: 10,
     paddingHorizontal: 12,
     alignItems: 'center',
     justifyContent: 'flex-start',
-    minWidth: 0,
   },
   foodName: {
     fontSize: 12,
@@ -347,6 +370,20 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingHorizontal: 4,
   },
+  recommendedBadge: {
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 12,
+    marginVertical: 4,
+    alignSelf: 'center',
+  },
+  recommendedText: {
+    color: '#fff',
+    fontFamily: 'Poppins_500Medium',
+    fontSize: 9,
+    lineHeight: 14,
+    textAlign: 'center',
+  },
   foodDescription: {
     fontSize: 10,
     fontFamily: 'Poppins_400Regular',
@@ -355,5 +392,43 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     marginTop: 6,
     paddingHorizontal: 4,
+  },
+
+  // ─── Card: modo 1 columna (fuente grande) ──────────────────────────────────
+  foodCardLarge: {
+    maxWidth: '100%',
+    marginHorizontal: 8,
+    flexDirection: 'row',   // imagen izquierda, texto derecha
+    alignItems: 'center',
+    minHeight: 100,
+  },
+  imageContainerLarge: {
+    paddingTop: 12,
+    paddingBottom: 12,
+    paddingLeft: 12,
+    paddingRight: 0,
+    flexShrink: 0,
+  },
+  foodImageLarge: {
+    width: 90,
+    height: 90,
+    borderRadius: 45,
+  },
+  foodContentLarge: {
+    alignItems: 'flex-start',   // texto alineado a la izquierda
+    paddingHorizontal: 14,
+    paddingVertical: 12,
+  },
+  recommendedBadgeLarge: {
+    alignSelf: 'flex-start',
+    marginVertical: 6,
+  },
+  recommendedTextLarge: {
+    fontSize: 11,
+    lineHeight: 16,
+  },
+  foodDescriptionLarge: {
+    fontSize: 12,
+    lineHeight: 18,
   },
 })
