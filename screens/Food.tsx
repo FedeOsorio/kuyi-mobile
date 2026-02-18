@@ -158,7 +158,7 @@ export default function Food() {
             {item.description}
           </Text>
         </View>
-        <Text style={styles.foodDescription} numberOfLines={3}>{item.top}</Text>
+        <Text style={styles.foodDescription} numberOfLines={4}>{item.top}</Text>
       </View>
     </View>
   )
@@ -300,15 +300,19 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
+    minHeight: 0,
+    display: 'flex',
+    flexDirection: 'column',
   },
   imageContainer: {
     alignItems: 'center',
-    marginTop: 10,
+    paddingTop: 12,
+    paddingBottom: 8,
     backgroundColor: '#fff',
   },
   foodImage: {
-    width: 80,
-    height: 80,
+    width: 70,
+    height: 70,
     borderRadius: 40,
     resizeMode: 'cover',
   },
@@ -316,6 +320,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 4,
     borderRadius: 12,
+    marginVertical: 4,
+    alignSelf: 'center',
+    minWidth: 0,
   },
   recommendedText: {
     color: '#fff',
@@ -325,9 +332,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   foodContent: {
+    flex: 1,
     padding: 10,
     paddingHorizontal: 12,
     alignItems: 'center',
+    justifyContent: 'flex-start',
+    minWidth: 0,
   },
   foodName: {
     fontSize: 13,
@@ -335,6 +345,7 @@ const styles = StyleSheet.create({
     color: '#78350f',
     marginBottom: 6,
     textAlign: 'center',
+    paddingHorizontal: 4,
   },
   foodDescription: {
     fontSize: 11,
@@ -343,5 +354,6 @@ const styles = StyleSheet.create({
     lineHeight: 16,
     textAlign: 'justify',
     marginTop: 6,
+    paddingHorizontal: 4,
   },
 })
