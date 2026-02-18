@@ -1,11 +1,12 @@
 import '@expo/metro-runtime'
 import { StatusBar } from 'expo-status-bar'
-import { StyleSheet } from 'react-native'
+import { Alert } from 'react-native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { useFonts, Poppins_400Regular, Poppins_500Medium, Poppins_600SemiBold, Poppins_700Bold, Poppins_800ExtraBold } from '@expo-google-fonts/poppins'
 import * as SplashScreen from 'expo-splash-screen'
+import * as Updates from 'expo-updates'
 
 import Home from '@/screens/Home'
 import Food from '@/screens/Food'
@@ -49,6 +50,35 @@ export default function App() {
       SplashScreen.hideAsync()
     }
   }, [fontsLoaded, fontError])
+
+  useEffect(() => {
+    async function onFetchUpdateAsync() {
+      try {
+        const update = await Updates.checkForUpdateAsync()
+
+        if (update.isAvailable) {
+          await Updates.fetchUpdateAsync()
+
+          Alert.alert(
+            'Actualización disponible',
+            'Descargamos mejoras para KuYi App. ¿Deseas aplicarlas ahora?',
+            [
+              { text: 'Más tarde', style: 'cancel' },
+              {
+                text: 'Actualizar',
+                onPress: async () => await Updates.reloadAsync(),
+              },
+            ],
+          )
+        }
+      } catch (error) {
+        // Si hay error (ej. sin internet), la app sigue normal
+        console.log('Error buscando updates: ', error)
+      }
+    }
+
+    onFetchUpdateAsync()
+  }, [])
 
   if (!fontsLoaded && !fontError) {
     return null
