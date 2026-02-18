@@ -19,7 +19,7 @@ const data: FoodItem[] = [
     name: 'Radicheta',
     description: 'Muy recomendada',
     recommended: 'high',
-    top: 'Puede darse a diario pero en raciones controladas ya que les genera adicción.'
+    top: 'Puede darse a diario pero en raciones controladas, les genera adicción.'
   },
   {
     id: '2',
@@ -51,7 +51,7 @@ const data: FoodItem[] = [
     name: 'Lechuga Criolla',
     description: 'Menos recomendada',
     recommended: 'low',
-    top: 'Más cantidad de agua que las anteriores, si no queda otra quitar el tallo.'
+    top: 'Más cantidad de agua que las anteriores.'
   },
   {
     id: '6',
@@ -59,7 +59,7 @@ const data: FoodItem[] = [
     name: 'Lechuga Iceberg',
     description: 'NO recomendada',
     recommended: 'not',
-    top: 'Es la que mayor cantidad de agua posee, no aporta fibra, como comer agua.'
+    top: 'Es pura agua, no aporta fibra, como comer agua.'
   }
 ]
 
