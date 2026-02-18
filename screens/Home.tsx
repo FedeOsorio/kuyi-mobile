@@ -28,7 +28,7 @@ export default function Home() {
 
     const logoScale = scrollY.interpolate({
         inputRange: [25, HEADER_SCROLL_DISTANCE],
-        outputrange: [1, 0.50],
+        outputRange: [1, 0.50],
         extrapolate: 'clamp'
     })
 
