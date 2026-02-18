@@ -212,12 +212,12 @@ const styles = StyleSheet.create({
     color: '#78350f',
   },
   paragraph: {
-    fontSize: 12,
+    fontSize: 11,
     fontFamily: 'Poppins_400Regular',
     color: '#451a03',
-    lineHeight: 22,
+    lineHeight: 18,
     marginBottom: 12,
-    textAlign: 'justify',
+    textAlign: 'left',
   },
   tipBox: {
     flexDirection: 'row',
@@ -249,11 +249,11 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   tipText: {
-    fontSize: 12,
+    fontSize: 11,
     fontFamily: 'Poppins_400Regular',
     color: '#451a03',
-    lineHeight: 20,
-    textAlign: 'justify',
+    lineHeight: 18,
+    textAlign: 'left',
   },
   noteBox: {
     backgroundColor: '#f0f9ff',
@@ -262,11 +262,11 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   noteText: {
-    fontSize: 12,
+    fontSize: 11,
     fontFamily: 'Poppins_400Regular',
     color: '#0c4a6e',
-    lineHeight: 20,
-    textAlign: 'justify',
+    lineHeight: 18,
+    textAlign: 'left',
     fontStyle: 'italic',
   },
   listTitleSection: {
@@ -282,11 +282,11 @@ const styles = StyleSheet.create({
     marginBottom: 6,
   },
   listSubtitle: {
-    fontSize: 12,
+    fontSize: 11,
     fontFamily: 'Poppins_400Regular',
     color: '#92400e',
-    lineHeight: 20,
-    textAlign: 'justify',
+    lineHeight: 18,
+    textAlign: 'left',
   },
   foodCard: {
     backgroundColor: '#fff',
@@ -313,7 +313,7 @@ const styles = StyleSheet.create({
   foodImage: {
     width: 70,
     height: 70,
-    borderRadius: 40,
+    borderRadius: 35,
     resizeMode: 'cover',
   },
   recommendedBadge: {
@@ -340,7 +340,7 @@ const styles = StyleSheet.create({
     minWidth: 0,
   },
   foodName: {
-    fontSize: 13,
+    fontSize: 12,
     fontFamily: 'Poppins_600SemiBold',
     color: '#78350f',
     marginBottom: 6,
@@ -348,11 +348,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 4,
   },
   foodDescription: {
-    fontSize: 11,
+    fontSize: 10,
     fontFamily: 'Poppins_400Regular',
     color: '#451a03',
-    lineHeight: 16,
-    textAlign: 'justify',
+    lineHeight: 15,
+    textAlign: 'left',
     marginTop: 6,
     paddingHorizontal: 4,
   },
