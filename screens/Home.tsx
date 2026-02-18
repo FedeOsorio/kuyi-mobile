@@ -1,10 +1,11 @@
 import React, { useRef } from 'react';
-import { Animated, StyleSheet, Text, View, Image } from 'react-native';
+import { Animated, StyleSheet, View, Image } from 'react-native';
 import Card from '@/components/Card';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '@/App';
+import { useFontScale } from '@/hooks/useFontScale';
 
 const HEADER_MAX_HEIGHT = 160;
 const HEADER_MIN_HEIGHT = 80;
@@ -15,6 +16,8 @@ type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
 export default function Home() {
     const navigation = useNavigation<NavigationProp>();
     const scrollY = useRef(new Animated.Value(0)).current
+    const fontScale = useFontScale();
+    const isLargeFont = fontScale > 1.3;
 
     // Interpolaciones de Animación
     const headerHeight = scrollY.interpolate({
@@ -25,7 +28,7 @@ export default function Home() {
 
     const logoScale = scrollY.interpolate({
         inputRange: [25, HEADER_SCROLL_DISTANCE],
-        outputRange: [1, 0.50],
+        outputrange: [1, 0.50],
         extrapolate: 'clamp'
     })
 
@@ -33,7 +36,7 @@ export default function Home() {
         <SafeAreaView style={styles.safeArea} edges={['top', 'bottom']}>
             <View style={{ flex: 1 }}>
                 <Animated.View style={[styles.header, { height: headerHeight, overflow: 'hidden' }]}>
-                    <Animated.View style={{ 
+                    <Animated.View style={{
                         transform: [{ scale: logoScale }]
                     }}>
                         <Image
@@ -53,54 +56,54 @@ export default function Home() {
                     scrollEventThrottle={16}
                     showsVerticalScrollIndicator={false}
                 >
-                        <View style={styles.grid}>
-                        <Card 
-                            title={'Adopción'} 
-                            imgBackground={require('@/assets/images/kuyiAdopt2.jpg')} 
-                            onPress={() => navigation.navigate('Adopcion')} 
-                            content={'Guía completa'} 
+                    <View style={[styles.grid, isLargeFont && styles.gridLarge]}>
+                        <Card
+                            title={'Adopción'}
+                            imgBackground={require('@/assets/images/kuyiAdopt2.jpg')}
+                            onPress={() => navigation.navigate('Adopcion')}
+                            content={'Guía completa'}
                         />
-                        <Card 
-                            title={'Alimentación'} 
-                            imgBackground={require('@/assets/images/kuyiFood.jpg')} 
-                            onPress={() => navigation.navigate('Alimentacion')} 
-                            content={'Dieta saludable'} 
+                        <Card
+                            title={'Alimentación'}
+                            imgBackground={require('@/assets/images/kuyiFood.jpg')}
+                            onPress={() => navigation.navigate('Alimentacion')}
+                            content={'Dieta saludable'}
                         />
-                        <Card 
-                            title={'Cuidados'} 
-                            imgBackground={require('@/assets/images/kuyiCare2.jpg')} 
-                            onPress={() => navigation.navigate('Cuidados')} 
-                            content={'Tips esenciales'} 
+                        <Card
+                            title={'Cuidados'}
+                            imgBackground={require('@/assets/images/kuyiCare2.jpg')}
+                            onPress={() => navigation.navigate('Cuidados')}
+                            content={'Tips esenciales'}
                         />
-                        <Card 
-                            title={'Heno'} 
-                            imgBackground={require('@/assets/images/cuyiHeno.jpg')} 
-                            onPress={() => navigation.navigate('Henos')} 
-                            content={'Tipos y calidad'} 
+                        <Card
+                            title={'Heno'}
+                            imgBackground={require('@/assets/images/cuyiHeno.jpg')}
+                            onPress={() => navigation.navigate('Henos')}
+                            content={'Tipos y calidad'}
                         />
-                        <Card 
-                            title={'Razas'} 
-                            imgBackground={require('@/assets/images/kuyiCobis.jpg')} 
-                            onPress={() => navigation.navigate('Razas')} 
-                            content={'Razas y variantes'} 
+                        <Card
+                            title={'Razas'}
+                            imgBackground={require('@/assets/images/kuyiCobis.jpg')}
+                            onPress={() => navigation.navigate('Razas')}
+                            content={'Razas y variantes'}
                         />
-                        <Card 
-                            title={'Salud'} 
-                            imgBackground={require('@/assets/images/kuyiHealth.jpg')} 
-                            onPress={() => navigation.navigate('Salud')} 
-                            content={'Enfermedades'} 
+                        <Card
+                            title={'Salud'}
+                            imgBackground={require('@/assets/images/kuyiHealth.jpg')}
+                            onPress={() => navigation.navigate('Salud')}
+                            content={'Enfermedades'}
                         />
-                        <Card 
-                            title={'Galería'} 
-                            imgBackground={require('@/assets/images/kuyiCage.jpg')} 
-                            onPress={() => navigation.navigate('Recintos')} 
-                            content={'Recintos'} 
+                        <Card
+                            title={'Galería'}
+                            imgBackground={require('@/assets/images/kuyiCage.jpg')}
+                            onPress={() => navigation.navigate('Recintos')}
+                            content={'Recintos'}
                         />
-                        <Card 
-                            title={'Contácto'} 
-                            imgBackground={require('@/assets/images/kuyiInfo.jpg')} 
-                            onPress={() => navigation.navigate('Info')} 
-                            content={'Info útil'} 
+                        <Card
+                            title={'Contácto'}
+                            imgBackground={require('@/assets/images/kuyiInfo.jpg')}
+                            onPress={() => navigation.navigate('Info')}
+                            content={'Info útil'}
                         />
                     </View>
                     <View style={styles.footerSpacer} />
@@ -146,6 +149,9 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
         justifyContent: 'space-between',
         gap: 15,
+    },
+    gridLarge: {
+        flexDirection: 'column',
     },
     footerSpacer: {
         height: 40,

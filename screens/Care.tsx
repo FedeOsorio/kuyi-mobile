@@ -1,7 +1,9 @@
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, Modal, ScrollView, Pressable } from 'react-native'
-import React, { useState } from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import HeaderComponent from '@/components/Header'
+import { StyleSheet, View, TouchableOpacity, Modal, ScrollView, Pressable, Text } from 'react-native';
+import React, { useState } from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import HeaderComponent from '@/components/Header';
+import { StyledText } from '@/components/StyledText';
+import { useFontScale } from '@/hooks/useFontScale';
 
 type CareTip = {
   id: string
@@ -68,13 +70,6 @@ const careTips: CareTip[] = [
     summary: 'Los cobayos son animales muy limpios por naturaleza.',
     content: 'Los cobayos se limpian solos, como los gatos. En condiciones normales NO necesitan baños.\n\n¿Cuándo bañarlos?\n\n• Solo si tienen la zona anal muy sucia y no pueden limpiarse solos.\n• Si tienen parásitos externos y el veterinario lo indica.\n• En casos de pelaje muy enredado o sucio por algún accidente.\n\nSi debés bañarlos:\n\n• Usá agua tibia, nunca fría ni caliente.\n• Shampoo especial para animales pequeños.\n• Secalos completamente con toalla y secador en temperatura baja. Nunca los dejes mojados.\n• Evitá mojarles la cabeza y las orejas.'
   },
-/*   {
-    id: 'limpieza-orejas',
-    title: 'Limpieza de orejas',
-    category: 'Higiene',
-    summary: 'Revisión periódica para prevenir infecciones.',
-    content: 'Las orejas de los cobayos deben revisarse cada 2 a 4 semanas.\n\nQué buscar:\n\n• Acumulación de cera marrón oscura o negra (puede indicar ácaros).\n• Mal olor.\n• El cobayo se rasca las orejas con frecuencia.\n• Costras o enrojecimiento en el interior.\n\nCómo limpiarlas:\n\n• Usá un hisopo o gasa húmeda con solución limpiadora para oídos de animales pequeños.\n• Solo limpiá la parte visible, nunca introduzcas nada profundo.\n• Si notás algo anormal, consultá al veterinario. Las infecciones de oído no tratadas pueden afectar el equilibrio.'
-  }, */
   {
     id: 'socialización',
     title: 'Socialización y vínculo',
@@ -100,6 +95,7 @@ const careTips: CareTip[] = [
 
 export default function Care() {
   const [selected, setSelected] = useState<string | null>(null)
+  const fontScale = useFontScale();
 
   const getCategoryColor = (category: string) => {
     switch (category) {
@@ -118,23 +114,10 @@ export default function Care() {
 
   const ListHeader = () => (
     <View style={styles.headerContainer}>
-      <Text style={styles.headerSubtitle}>
+      <StyledText style={[styles.headerSubtitle, { fontSize: 13 / fontScale }]}>
         - Todo lo que necesitás saber para el día a día -
-      </Text>
+      </StyledText>
     </View>
-  )
-
-  const renderItem = ({ item }: { item: CareTip }) => (
-    <TouchableOpacity
-      style={styles.card}
-      activeOpacity={0.8}
-      onPress={() => setSelected(item.id)}
-    >
-      <View style={styles.cardHeader}>
-        <Text style={styles.cardTitle}>{item.title}</Text>
-      </View>
-      <Text style={styles.cardSummary}>{item.summary}</Text>
-    </TouchableOpacity>
   )
 
   return (
@@ -148,9 +131,9 @@ export default function Care() {
         {categories.map((category) => (
           <View key={category} style={styles.categorySection}>
             <View style={[styles.categoryHeader, { borderLeftColor: getCategoryColor(category) }]}>
-              <Text style={[styles.categoryTitle, { color: getCategoryColor(category) }]}>
+              <StyledText style={[styles.categoryTitle, { color: getCategoryColor(category), fontSize: 14 / fontScale }]}>
                 {category}
-              </Text>
+              </StyledText>
             </View>
             {careTips
               .filter((t) => t.category === category)
@@ -162,9 +145,9 @@ export default function Care() {
                   onPress={() => setSelected(item.id)}
                 >
                   <View style={styles.cardHeader}>
-                    <Text style={styles.cardTitle}>{item.title}</Text>
+                    <StyledText style={[styles.cardTitle, { fontSize: 14 / fontScale }]}>{item.title}</StyledText>
                   </View>
-                  <Text style={styles.cardSummary}>{item.summary}</Text>
+                  <StyledText style={[styles.cardSummary, { fontSize: 12 / fontScale, lineHeight: 18 / fontScale }]}>{item.summary}</StyledText>
                 </TouchableOpacity>
               ))}
           </View>
@@ -186,18 +169,18 @@ export default function Care() {
             {selectedTip && (
               <>
                 <View style={styles.modalHeader}>
-                  <Text style={styles.modalTitle}>{selectedTip.title}</Text>
+                  <StyledText style={[styles.modalTitle, { fontSize: 17 / fontScale }]}>{selectedTip.title}</StyledText>
                 </View>
 
                 <View style={styles.modalContent}>
-                  <Text style={styles.modalText}>{selectedTip.content}</Text>
+                  <StyledText style={[styles.modalText, { fontSize: 12 / fontScale, lineHeight: 22 / fontScale }]}>{selectedTip.content}</StyledText>
                 </View>
               </>
             )}
           </ScrollView>
 
           <Pressable style={styles.closeButton} onPress={() => setSelected(null)}>
-            <Text style={styles.closeButtonText}>Cerrar</Text>
+            <StyledText style={[styles.closeButtonText, { fontSize: 14 / fontScale }]}>Cerrar</StyledText>
           </Pressable>
         </View>
       </Modal>

@@ -1,7 +1,9 @@
-import { StyleSheet, Text, View, Image, FlatList, PixelRatio, AccessibilityInfo, AppState } from 'react-native'
-import React, { useState, useEffect } from 'react'
-import HeaderComponent from '@/components/Header'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import { StyleSheet, View, Image, FlatList } from 'react-native';
+import React from 'react';
+import HeaderComponent from '@/components/Header';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useFontScale } from '@/hooks/useFontScale';
+import { StyledText } from '@/components/StyledText';
 
 type FoodItem = {
   id: string
@@ -73,31 +75,7 @@ const getRecommendedColor = (level: string) => {
   }
 }
 
-function useFontScale() {
-  const [fontScale, setFontScale] = useState(() => PixelRatio.getFontScale())
 
-  useEffect(() => {
-    const refresh = () => setFontScale(PixelRatio.getFontScale())
-
-    // iOS: cambios de accesibilidad en tiempo real
-    const boldSub = AccessibilityInfo.addEventListener('boldTextChanged', refresh)
-    const motionSub = AccessibilityInfo.addEventListener('reduceMotionChanged', refresh)
-
-    // Android + iOS: cuando el usuario vuelve a la app después de cambiar
-    // ajustes del sistema (cubre el caso de font scale en Android)
-    const appStateSub = AppState.addEventListener('change', (state) => {
-      if (state === 'active') refresh()
-    })
-
-    return () => {
-      boldSub.remove()
-      motionSub.remove()
-      appStateSub.remove()
-    }
-  }, [])
-
-  return fontScale
-}
 
 const ListHeader = () => (
   <View>
@@ -108,106 +86,121 @@ const ListHeader = () => (
     />
 
     <View style={styles.introSection}>
-      <Text style={styles.sectionTitle}>Consideración General</Text>
-      <Text style={styles.paragraph}>
+      <StyledText variant="title" style={styles.sectionTitle}>Consideración General</StyledText>
+      <StyledText style={styles.paragraph}>
         La alimentación de un Cobayo está compuesta 80% por heno de pastura,
         el cual es obligatorio en su dieta, 15% por verduras y frutas ocasionales,
         y el 5% restante corresponde a pellets de alimento balanceado.
-      </Text>
-      <Text style={styles.paragraph}>
+      </StyledText>
+      <StyledText style={styles.paragraph}>
         La dieta se ve ligeramente modificada según la edad del cobayito. A continuación
         encontrarás mayores detalles, consideraciones a tener en cuenta y todas las verduras
         tanto permitidas como prohibidas en la dieta de tu mascota.
-      </Text>
+      </StyledText>
     </View>
 
     <View style={styles.tipsSection}>
-      <Text style={styles.sectionTitle}>Consejos para todas las edades</Text>
+      <StyledText variant="title" style={styles.sectionTitle}>Consejos para todas las edades</StyledText>
 
       <View style={styles.tipBox}>
-        <Text style={styles.tipIcon}>💊</Text>
+        <StyledText style={styles.tipIcon}>💊</StyledText>
         <View style={styles.tipContent}>
-          <Text style={styles.tipTitle}>Vitamina C</Text>
-          <Text style={styles.tipText}>
+          <StyledText style={styles.tipTitle}>Vitamina C</StyledText>
+          <StyledText style={styles.tipText}>
             Las cobayas no pueden producir Vitamina C, la cual es muy importante en su
             metabolismo. Su dieta debe incluir fuentes ricas en esta vitamina como el
             morrón o suplementos específicos.
-          </Text>
+          </StyledText>
         </View>
       </View>
 
       <View style={[styles.tipBox, styles.warningBox]}>
-        <Text style={styles.tipIcon}>⚠️</Text>
+        <StyledText style={styles.tipIcon}>⚠️</StyledText>
         <View style={styles.tipContent}>
-          <Text style={styles.tipTitle}>Nunca ofrecer</Text>
-          <Text style={styles.tipText}>
+          <StyledText style={styles.tipTitle}>Nunca ofrecer</StyledText>
+          <StyledText style={styles.tipText}>
             Papa, cebolla, ajo, repollo, pan, galletas, chocolate, carne, productos
             lácteos, ni alimentos con azúcar o sal.
-          </Text>
+          </StyledText>
         </View>
       </View>
 
       <View style={styles.noteBox}>
-        <Text style={styles.noteText}>
+        <StyledText style={styles.noteText}>
           Todos los vegetales deben darse crudos, lavados y secados. Es muy importante
           quitarles las semillas ya que pueden causar daño en su aparato digestivo.
-        </Text>
+        </StyledText>
       </View>
     </View>
 
     <View style={styles.listTitleSection}>
-      <Text style={styles.listTitle}>🥬 Hojas Verdes</Text>
-      <Text style={styles.listSubtitle}>
+      <StyledText variant="title" style={styles.listTitle}>🥬 Hojas Verdes</StyledText>
+      <StyledText style={styles.listSubtitle}>
         Las lechugas no deben darse en tanta cantidad por su alto contenido en agua.
         Entre 1 a 2 hojas por cobaya por día es lo más recomendado.
-      </Text>
+      </StyledText>
     </View>
   </View>
 )
 
 export default function Food() {
-  const fontScale = useFontScale()
-  const isLargeFont = fontScale >= 1.3
-  const numColumns = isLargeFont ? 1 : 2
+  const fontScale = useFontScale();
+  const isLargeFont = fontScale >= 1.3;
+  const numColumns = isLargeFont ? 1 : 2;
 
   const renderItem = ({ item }: { item: FoodItem }) => (
     <View style={[styles.foodCard, isLargeFont && styles.foodCardLarge]}>
-      <View style={[styles.imageContainer, isLargeFont && styles.imageContainerLarge]}>
+      <View
+        style={[
+          styles.imageContainer,
+          isLargeFont && styles.imageContainerLarge,
+        ]}
+      >
         <Image
           source={item.image}
           style={[styles.foodImage, isLargeFont && styles.foodImageLarge]}
         />
       </View>
 
-      <View style={[styles.foodContent, isLargeFont && styles.foodContentLarge]}>
-        <Text style={styles.foodName}>{item.name}</Text>
+      <View
+        style={[styles.foodContent, isLargeFont && styles.foodContentLarge]}
+      >
+        <StyledText style={styles.foodName}>{item.name}</StyledText>
         <View
           style={[
             styles.recommendedBadge,
             isLargeFont && styles.recommendedBadgeLarge,
-            { backgroundColor: getRecommendedColor(item.recommended) }
+            { backgroundColor: getRecommendedColor(item.recommended) },
           ]}
         >
-          <Text style={[styles.recommendedText, isLargeFont && styles.recommendedTextLarge]}>
+          <StyledText
+            style={[
+              styles.recommendedText,
+              isLargeFont && styles.recommendedTextLarge,
+            ]}
+          >
             {item.description}
-          </Text>
+          </StyledText>
         </View>
-        <Text style={[styles.foodDescription, isLargeFont && styles.foodDescriptionLarge]}>
+        <StyledText
+          style={[
+            styles.foodDescription,
+            isLargeFont && styles.foodDescriptionLarge,
+          ]}
+        >
           {item.top}
-        </Text>
+        </StyledText>
       </View>
     </View>
-  )
+  );
 
   return (
     <SafeAreaView style={styles.container}>
-      <HeaderComponent title='Alimentación' />
+      <HeaderComponent title="Alimentación" />
       <FlatList
         data={data}
         keyExtractor={(item) => item.id}
         renderItem={renderItem}
-        // 'key' fuerza re-montaje del FlatList cuando numColumns cambia,
-        // evitando el error de React Native con columnas dinámicas.
         key={numColumns}
         numColumns={numColumns}
         contentContainerStyle={styles.listContent}
@@ -216,7 +209,7 @@ export default function Food() {
         showsVerticalScrollIndicator={false}
       />
     </SafeAreaView>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -398,7 +391,7 @@ const styles = StyleSheet.create({
   foodCardLarge: {
     maxWidth: '100%',
     marginHorizontal: 8,
-    flexDirection: 'row',   // imagen izquierda, texto derecha
+    flexDirection: 'row',
     alignItems: 'center',
     minHeight: 100,
   },
@@ -415,7 +408,7 @@ const styles = StyleSheet.create({
     borderRadius: 45,
   },
   foodContentLarge: {
-    alignItems: 'flex-start',   // texto alineado a la izquierda
+    alignItems: 'flex-start',
     paddingHorizontal: 14,
     paddingVertical: 12,
   },

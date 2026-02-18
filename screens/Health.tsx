@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import {
   StyleSheet,
-  Text,
   View,
   FlatList,
   TouchableOpacity,
@@ -9,28 +8,44 @@ import {
   ScrollView,
   Pressable,
   Image,
-} from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import HeaderComponent from '@/components/Header'
-import { HealthIssue, healthIssues } from '@/data/healthIssues'
+} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import HeaderComponent from '@/components/Header';
+import { HealthIssue, healthIssues } from '@/data/healthIssues';
+import { StyledText } from '@/components/StyledText';
+import { useFontScale } from '@/hooks/useFontScale';
 
-const HealthHeader = () => (
-  <View style={styles.headerContainer}>
-    <Text style={styles.headerSubtitle}>
-      Guía de problemas comunes en cobayas y primeros auxilios
-    </Text>
-    <View style={styles.warningBox}>
-      <Text style={styles.warningText}>
-        ⚠️ Esta información NO reemplaza la consulta veterinaria. Ante
-        cualquier síntoma, contacta a tu veterinario de exóticos lo antes
-        posible.
-      </Text>
+const HealthHeader = () => {
+  const fontScale = useFontScale();
+  const dynamicStyles = {
+    headerSubtitle: {
+      fontSize: 12 / fontScale,
+    },
+    warningText: {
+      fontSize: 12 / fontScale,
+      lineHeight: 18 / fontScale,
+    },
+  };
+
+  return (
+    <View style={styles.headerContainer}>
+      <StyledText style={[styles.headerSubtitle, dynamicStyles.headerSubtitle]}>
+        Guía de problemas comunes en cobayas y primeros auxilios
+      </StyledText>
+      <View style={styles.warningBox}>
+        <StyledText style={[styles.warningText, dynamicStyles.warningText]}>
+          ⚠️ Esta información NO reemplaza la consulta veterinaria. Ante
+          cualquier síntoma, contacta a tu veterinario de exóticos lo antes
+          posible.
+        </StyledText>
+      </View>
     </View>
-  </View>
-)
+  );
+};
 
 export default function Health() {
   const [selected, setSelected] = useState<string | null>(null)
+  const fontScale = useFontScale();
 
   const getSeverityColor = (severity: string) => {
     switch (severity) {
@@ -59,12 +74,25 @@ export default function Health() {
   }
 
   const renderItem = ({ item }: { item: HealthIssue }) => {
-    const isVisible = item.visible ?? true
+    const isVisible = item.visible ?? true;
+    const dynamicStyles = {
+      cardTitle: {
+        fontSize: 13 / fontScale,
+      },
+      cardCategory: {
+        fontSize: 14 / fontScale,
+      },
+      cardSubtitle: {
+        fontSize: 12 / fontScale,
+        lineHeight: 18 / fontScale,
+      },
+    };
+
     return (
       <TouchableOpacity
         style={[
           styles.card,
-          !isVisible && { opacity: 0.4 }, // make hidden issues more transparent
+          !isVisible && { opacity: 0.4 },
         ]}
         activeOpacity={isVisible ? 0.8 : 1}
         onPress={() => {
@@ -75,8 +103,8 @@ export default function Health() {
       >
         <View style={styles.cardHeader}>
           <View style={styles.cardTitleContainer}>
-            <Text style={styles.cardTitle}>{item.name}</Text>
-            <Text style={styles.cardCategory}>{item.category}</Text>
+            <StyledText style={[styles.cardTitle, dynamicStyles.cardTitle]}>{item.name}</StyledText>
+            <StyledText style={[styles.cardCategory, dynamicStyles.cardCategory]}>{item.category}</StyledText>
           </View>
           <View
             style={[
@@ -84,14 +112,14 @@ export default function Health() {
               { backgroundColor: getSeverityColor(item.severity) },
             ]}
           >
-            <Text style={styles.severityText}>
+            <StyledText style={styles.severityText}>
               {getSeverityText(item.severity)}
-            </Text>
+            </StyledText>
           </View>
         </View>
-        <Text style={styles.cardSubtitle} numberOfLines={2}>
+        <StyledText style={[styles.cardSubtitle, dynamicStyles.cardSubtitle]} numberOfLines={2}>
           {item.symptoms.slice(0, 3).join(' • ')}
-        </Text>
+        </StyledText>
       </TouchableOpacity>
     )
   }
@@ -131,7 +159,7 @@ export default function Health() {
                 {selectedIssue && (
                   <>
                     <View style={styles.modalHeader}>
-                      <Text style={styles.modalTitle}>{selectedIssue.name}</Text>
+                      <StyledText style={styles.modalTitle}>{selectedIssue.name}</StyledText>
                       <View
                         style={[
                           styles.severityBadgeLarge,
@@ -142,56 +170,56 @@ export default function Health() {
                           },
                         ]}
                       >
-                        <Text style={styles.severityTextLarge}>
+                        <StyledText style={styles.severityTextLarge}>
                           {getSeverityText(selectedIssue.severity)}
-                        </Text>
+                        </StyledText>
                       </View>
                     </View>
 
                     <View style={styles.modalContent}>
                       <View style={styles.section}>
-                        <Text style={styles.sectionTitle}>
+                        <StyledText style={styles.sectionTitle}>
                           🔍 Síntomas a observar
-                        </Text>
+                        </StyledText>
                         {selectedIssue.symptoms.map((symptom, index) => (
-                          <Text key={index} style={styles.symptomItem}>
+                          <StyledText key={index} style={styles.symptomItem}>
                             • {symptom}
-                          </Text>
+                          </StyledText>
                         ))}
                       </View>
 
                       <View style={styles.divider} />
 
                       <View style={styles.section}>
-                        <Text style={styles.sectionTitle}>
+                        <StyledText style={styles.sectionTitle}>
                           ⚡ Acciones Inmediatas
-                        </Text>
+                        </StyledText>
                         <View style={styles.actionsBox}>
-                          <Text style={styles.actionsText}>
+                          <StyledText style={styles.actionsText}>
                             {selectedIssue.immediateActions}
-                          </Text>
+                          </StyledText>
                         </View>
                       </View>
 
                       <View style={styles.divider} />
                       <View style={styles.section}>
-                        <Text style={styles.sectionTitle}>🚨 Causas</Text>
-                        <Text style={styles.preventionText}>
+                        <StyledText style={styles.sectionTitle}>🚨 Causas</StyledText>
+                        <StyledText style={styles.preventionText}>
                           {selectedIssue.reasons}
-                        </Text>
+                        </StyledText>
                       </View>
 
                       <View style={styles.divider} />
                       <View style={styles.section}>
-                        <Text style={styles.sectionTitle}>🛡️ Prevención</Text>
-                        <Text style={styles.preventionText}>
+                        <StyledText style={styles.sectionTitle}>🛡️ Prevención</StyledText>
+                        <StyledText style={styles.preventionText}>
                           {selectedIssue.prevention}
-                        </Text>
+                        </StyledText>
                       </View>
 
                       <View style={styles.divider} />
 
-                      <Text style={styles.sectionTitle}>Imágenes</Text>
+                      <StyledText style={styles.sectionTitle}>Imágenes</StyledText>
                       <View style={styles.section}>
                         {selectedIssue.images && selectedIssue.images.length > 0 && (
                           <View style={styles.imagesContainer}>
@@ -219,7 +247,7 @@ export default function Health() {
                 style={styles.closeButton}
                 onPress={() => setSelected(null)}
               >
-                <Text style={styles.closeButtonText}>Cerrar</Text>
+                <StyledText style={styles.closeButtonText}>Cerrar</StyledText>
               </Pressable>
             </View>
           </View>
@@ -228,7 +256,6 @@ export default function Health() {
     </SafeAreaView>
   )
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,

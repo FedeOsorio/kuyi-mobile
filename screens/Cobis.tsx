@@ -1,26 +1,29 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react';
 import {
   StyleSheet,
-  Text,
   View,
   FlatList,
   TouchableOpacity,
   Modal,
   ScrollView,
   Pressable,
-  Linking,
   Image,
-} from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import breeds from '@/data/breeds'
-import HeaderComponent from '@/components/Header'
+} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useFontScale } from '@/hooks/useFontScale';
+import breeds from '@/data/breeds';
+import HeaderComponent from '@/components/Header';
+import { StyledText } from '@/components/StyledText';
 
 export default function Cobis() {
   const [selected, setSelected] = useState<string | null>(null)
+  const fontScale = useFontScale();
+  const isLargeFont = fontScale > 1.3;
+  const numColumns = isLargeFont ? 1 : 2;
 
   const renderItem = ({ item }: any) => {
     return (
-      <View style={styles.cardWrapper}>
+      <View style={[styles.cardWrapper, isLargeFont && { marginHorizontal: 8 }]}>
         <TouchableOpacity
           style={styles.card}
           activeOpacity={0.8}
@@ -32,12 +35,12 @@ export default function Cobis() {
             resizeMode="cover"
           />
           <View style={styles.cardText}>
-            <Text style={styles.cardTitle} numberOfLines={1}>
+            <StyledText style={styles.cardTitle} numberOfLines={1}>
               {item.name}
-            </Text>
-            <Text style={styles.cardSubtitle} numberOfLines={1}>
+            </StyledText>
+            <StyledText style={styles.cardSubtitle} numberOfLines={1}>
               {item.coat}
-            </Text>
+            </StyledText>
           </View>
         </TouchableOpacity>
       </View>
@@ -55,10 +58,12 @@ export default function Cobis() {
         data={breeds}
         renderItem={renderItem}
         keyExtractor={(i) => i.id}
-        numColumns={2}
+        key={numColumns}
+        numColumns={numColumns}
         contentContainerStyle={styles.list}
         showsVerticalScrollIndicator={false}
         scrollEnabled={true}
+        columnWrapperStyle={numColumns > 1 ? styles.columnWrapper : undefined}
       />
 
       <Modal
@@ -87,38 +92,38 @@ export default function Cobis() {
                   />
 
                   <View style={styles.modalContent}>
-                    <Text style={styles.modalTitle}>{selectedBreed.name}</Text>
+                    <StyledText style={styles.modalTitle}>{selectedBreed.name}</StyledText>
 
                     <View style={styles.infoRow}>
-                      <Text style={styles.infoLabel}>Pelaje:</Text>
-                      <Text style={styles.infoValue}>{selectedBreed.coat}</Text>
+                      <StyledText style={styles.infoLabel}>Pelaje:</StyledText>
+                      <StyledText style={styles.infoValue}>{selectedBreed.coat}</StyledText>
                     </View>
 
                     <View style={styles.infoRow}>
-                      <Text style={styles.infoLabel}>Ubicación:</Text>
-                      <Text style={styles.infoValue}>{selectedBreed.location}</Text>
+                      <StyledText style={styles.infoLabel}>Ubicación:</StyledText>
+                      <StyledText style={styles.infoValue}>{selectedBreed.location}</StyledText>
                     </View>
 
                     <View style={styles.infoRow}>
-                      <Text style={styles.infoLabel}>Colores:</Text>
-                      <Text style={styles.infoValue}>
+                      <StyledText style={styles.infoLabel}>Colores:</StyledText>
+                      <StyledText style={styles.infoValue}>
                         {selectedBreed?.colors?.join(', ')}
-                      </Text>
+                      </StyledText>
                     </View>
 
                     <View style={styles.divider} />
 
-                    <Text style={styles.descriptionTitle}>Descripción</Text>
-                    <Text style={styles.modalDescription}>
+                    <StyledText style={styles.descriptionTitle}>Descripción</StyledText>
+                    <StyledText style={styles.modalDescription}>
                       {selectedBreed.description}
-                    </Text>
+                    </StyledText>
                   </View>
                 </>
               )}
             </ScrollView>
 
             <Pressable style={styles.closeButton} onPress={() => setSelected(null)}>
-              <Text style={styles.closeButtonText}>Cerrar</Text>
+              <StyledText style={styles.closeButtonText}>Cerrar</StyledText>
             </Pressable>
           </View>
         </View>
@@ -144,10 +149,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingBottom: 24
   },
+  columnWrapper: {
+    justifyContent: 'space-between',
+  },
   cardWrapper: {
     flex: 1,
     margin: 6,
-    maxWidth: '50%'
   },
   card: {
     flex: 1,

@@ -1,9 +1,9 @@
-import { FlatList, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import { Image } from 'expo-image'
-import HeaderComponent from '@/components/Header'
-import H2 from '@/components/H2'
+import { FlatList, StyleSheet, View } from 'react-native';
+import React from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Image } from 'expo-image';
+import HeaderComponent from '@/components/Header';
+import { StyledText } from '@/components/StyledText';
 
 const data = [
   { id: '1', image: require('@/assets/images/hay/pastura.jpg'), name: 'Heno de Pastura', desc: 'Ideal' },
@@ -17,54 +17,54 @@ const data = [
 const HayHeader = () => (
   <View style={styles.headerContent}>
     <View style={styles.mainInfoCard}>
-      <Text style={styles.mainText}>
-        Es <Text style={styles.bold}>obligatorio</Text> en la dieta de un cobayo ya que es el <Text style={styles.highlight}>80% de su alimentación diaria</Text>. Debe estar disponible en su recinto las 24 horas.
-      </Text>
+      <StyledText style={styles.mainText}>
+        Es <StyledText style={styles.bold}>obligatorio</StyledText> en la dieta de un cobayo ya que es el <StyledText style={styles.highlight}>80% de su alimentación diaria</StyledText>. Debe estar disponible en su recinto las 24 horas.
+      </StyledText>
       <View style={styles.qualityBadge}>
-        <Text style={styles.qualityText}>💡 Calidad: Color verde, mucha hierba, sin ramas gruesas.</Text>
+        <StyledText style={styles.qualityText}>💡 Calidad: Color verde, mucha hierba, sin ramas gruesas.</StyledText>
       </View>
     </View>
 
-    <H2 style={styles.sectionTitle} content={'Heno vs Pasto Fresco'} />
+    <StyledText variant="title" style={styles.sectionTitle}>Heno vs Pasto Fresco</StyledText>
     <View style={styles.comparisonCard}>
-      <Text style={styles.paragraph}>
+      <StyledText style={styles.paragraph}>
         Gracias al proceso de secado, se reduce la humedad a niveles muy bajos. {'\n'}
-      </Text>
+      </StyledText>
       
-      <Text style={styles.paragraph}>
-        Esto es vital para el <Text style={styles.bold}>desgaste dental</Text> y la digestión. Además, reduce el riesgo de gases, diarrea o hinchazón abdominal.
-      </Text>
+      <StyledText style={styles.paragraph}>
+        Esto es vital para el <StyledText style={styles.bold}>desgaste dental</StyledText> y la digestión. Además, reduce el riesgo de gases, diarrea o hinchazón abdominal.
+      </StyledText>
     </View>
 
-    <H2 style={styles.sectionTitle} content={'Tipos de Henos'} />
+    <StyledText variant="title" style={styles.sectionTitle}>Tipos de Henos</StyledText>
     
     {/* Sección Detallada de Tipos */}
     <View style={styles.typesContainer}>
       <View style={styles.typeItem}>
-        <Text style={styles.typeTitle}>1 - Heno de Pasturas</Text>
-        <Text style={styles.typeDesc}>El más importante. Alto en fibra y bajo en calcio. Para cobayos de todas las edades.</Text>
+        <StyledText style={styles.typeTitle}>1 - Heno de Pasturas</StyledText>
+        <StyledText style={styles.typeDesc}>El más importante. Alto en fibra y bajo en calcio. Para cobayos de todas las edades.</StyledText>
       </View>
       <View style={styles.typeItem}>
-        <Text style={styles.typeTitle}>2 - Heno de Avena</Text>
-        <Text style={styles.typeDesc}>Buena opción para dar como variedad o mezclar. No debe ser el principal.</Text>
+        <StyledText style={styles.typeTitle}>2 - Heno de Avena</StyledText>
+        <StyledText style={styles.typeDesc}>Buena opción para dar como variedad o mezclar. No debe ser el principal.</StyledText>
       </View>
 
       <View style={styles.typeItem}>
-        <Text style={styles.typeTitle}>3 - Heno de Alfalfa</Text>
-        <Text style={styles.typeDesc}>Complementario en cobayas bebés (0 a 6 meses), embarazadas o en recuperación.{'\n'}</Text>
-        <Text style={styles.typeDesc}>En la dieta acompaña al heno de pasturas, pero no lo reemplaza.</Text>
+        <StyledText style={styles.typeTitle}>3 - Heno de Alfalfa</StyledText>
+        <StyledText style={styles.typeDesc}>Complementario en cobayas bebés (0 a 6 meses), embarazadas o en recuperación.{'\n'}</StyledText>
+        <StyledText style={styles.typeDesc}>En la dieta acompaña al heno de pasturas, pero no lo reemplaza.</StyledText>
         <View style={styles.warningBox}>
-          <Text style={styles.warningText}>🚨 <Text style={styles.bold}>Advertencia:</Text> No debe darse diariamente en grandes cantidades por su alto contenido de calcio (riesgo de cálculos renales). Es un complemento.</Text>
+          <StyledText style={styles.warningText}>🚨 <StyledText style={styles.bold}>Advertencia:</StyledText> No debe darse diariamente en grandes cantidades por su alto contenido de calcio (riesgo de cálculos renales). Es un complemento.</StyledText>
         </View>
       </View>
 
       <View style={styles.typeItem}>
-        <Text style={styles.typeTitle}>4 - Heno en Cubo</Text>
-        <Text style={styles.typeDesc}>Excelente para roer y desgastar dientes. Vienen de pasturas o alfalfa, ambos válidos.</Text>
+        <StyledText style={styles.typeTitle}>4 - Heno en Cubo</StyledText>
+        <StyledText style={styles.typeDesc}>Excelente para roer y desgastar dientes. Vienen de pasturas o alfalfa, ambos válidos.</StyledText>
       </View>
     </View>
 
-    <H2 style={[styles.sectionTitle, { textAlign: 'center', marginTop: -6, marginBottom: 4 }]} content={'Catálogo Visual'} />
+    <StyledText variant="title" style={[styles.sectionTitle, { textAlign: 'center', marginTop: -6, marginBottom: 4 }]}>Catálogo Visual</StyledText>
   </View>
 );
 
@@ -83,9 +83,9 @@ export default function Hay() {
           <View style={styles.card}>
             <Image source={item.image} style={styles.image} contentFit="cover" />
             <View style={styles.cardInfo}>
-              <Text style={styles.name}>{item.name}</Text>
+              <StyledText style={styles.name}>{item.name}</StyledText>
               <View style={[styles.badge, { backgroundColor: item.desc === 'Evitar' ? '#ffebee' : '#e8f5e9' }]}>
-                <Text style={[styles.badgeText, { color: item.desc === 'Evitar' ? '#c62828' : '#2e7d32' }]}>{item.desc}</Text>
+                <StyledText style={[styles.badgeText, { color: item.desc === 'Evitar' ? '#c62828' : '#2e7d32' }]}>{item.desc}</StyledText>
               </View>
             </View>
           </View>

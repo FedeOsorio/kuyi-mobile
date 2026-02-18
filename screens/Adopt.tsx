@@ -1,11 +1,12 @@
-import React from 'react'
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import { LinearGradient } from 'expo-linear-gradient'
-import HeaderComponent from '@/components/Header'
-import { useNavigation } from '@react-navigation/native'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { RootStackParamList } from '@/App'
+import React from 'react';
+import { StyleSheet, View, ScrollView, TouchableOpacity } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { LinearGradient } from 'expo-linear-gradient';
+import HeaderComponent from '@/components/Header';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '@/App';
+import { StyledText } from '@/components/StyledText';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>
 
@@ -26,73 +27,73 @@ export default function Adopt() {
       >
         {/* Intro */}
         <View style={styles.introSection}>
-          <Text style={styles.introTitle}>¿Pensando en adoptar?</Text>
-          <Text style={styles.introText}>
+          <StyledText variant="title" style={styles.introTitle}>¿Pensando en adoptar?</StyledText>
+          <StyledText style={styles.introText}>
             Antes de adoptar un cobayo, es importante conocer sus necesidades básicas 
             para asegurar su bienestar.
-          </Text>
+          </StyledText>
         </View>
 
         {/* Hábitat */}
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>Tamaño del Hábitat</Text>
+            <StyledText variant="title" style={styles.sectionTitle}>Tamaño del Hábitat</StyledText>
           </View>
           
           <View style={styles.card}>
             <View style={styles.habitatBox}>
-              <Text style={styles.habitatTitle}>Para 1 cobayo</Text>
-              <Text style={styles.habitatSize}>70cm × 105cm</Text>
-              <Text style={styles.habitatSubtext}>Mínimo recomendado</Text>
+              <StyledText style={styles.habitatTitle}>Para 1 cobayo</StyledText>
+              <StyledText style={styles.habitatSize}>70cm × 105cm</StyledText>
+              <StyledText style={styles.habitatSubtext}>Mínimo recomendado</StyledText>
             </View>
 
             <View style={[styles.habitatBox, styles.habitatBoxHighlight]}>
-              <Text style={styles.habitatTitle}>Para 2 cobayos (Recomendado)</Text>
-              <Text style={styles.habitatSize}>70cm × 140cm</Text>
-              <Text style={styles.habitatSubtext}>Opción ideal</Text>
+              <StyledText style={styles.habitatTitle}>Para 2 cobayos (Recomendado)</StyledText>
+              <StyledText style={styles.habitatSize}>70cm × 140cm</StyledText>
+              <StyledText style={styles.habitatSubtext}>Opción ideal</StyledText>
             </View>
 
-            <Text style={styles.paragraph}>
-              <Text style={styles.bold}>Tip:</Text> Podés armar el hábitat con paneles 
+            <StyledText style={styles.paragraph}>
+              <StyledText style={styles.bold}>Tip:</StyledText> Podés armar el hábitat con paneles 
               modulares tipo C&C (Cubes & Coroplast), son económicos y personalizables.
-            </Text>
+            </StyledText>
           </View>
         </View>
 
         {/* Compañía */}
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
-            <Text style={styles.sectionIcon}>🐹</Text>
-            <Text style={styles.sectionTitle}>¿Uno o Dos?</Text>
+            <StyledText style={styles.sectionIcon}>🐹</StyledText>
+            <StyledText variant="title" style={styles.sectionTitle}>¿Uno o Dos?</StyledText>
           </View>
           
           <View style={styles.card}>
-            <Text style={styles.paragraph}>
-              <Text style={styles.bold}>Lo ideal son 2 cobayos</Text> del mismo sexo, 
+            <StyledText style={styles.paragraph}>
+              <StyledText style={styles.bold}>Lo ideal son 2 cobayos</StyledText> del mismo sexo, 
               ya que son animales muy sociales y disfrutan de la compañía de su especie.
-            </Text>
+            </StyledText>
 
             <View style={styles.infoBox}>
-              <Text style={styles.infoBoxTitle}>Hembras</Text>
-              <Text style={styles.infoBoxText}>
+              <StyledText style={styles.infoBoxTitle}>Hembras</StyledText>
+              <StyledText style={styles.infoBoxText}>
                 Se adaptan mejor en pareja. Son más independientes del humano e ideales si buscás tranquilidad.
-              </Text>
+              </StyledText>
             </View>
 
             <View style={styles.infoBox}>
-              <Text style={styles.infoBoxTitle}>Machos</Text>
-              <Text style={styles.infoBoxText}>
+              <StyledText style={styles.infoBoxTitle}>Machos</StyledText>
+              <StyledText style={styles.infoBoxText}>
                 Pueden vivir solos más fácilmente. Son más apegados al humano y buscan más interacción.
-              </Text>
+              </StyledText>
             </View>
 
             <View style={styles.warningBox}>
-              <Text style={styles.warningIcon}>💡</Text>
-              <Text style={styles.warningText}>
-                <Text style={styles.bold}>Recordá:</Text> Si tu cobayo huye cuando 
+              <StyledText style={styles.warningIcon}>💡</StyledText>
+              <StyledText style={styles.warningText}>
+                <StyledText style={styles.bold}>Recordá:</StyledText> Si tu cobayo huye cuando 
                 te acercás, no es porque no te quiera. Es su instinto natural de 
                 supervivencia ante movimientos bruscos. Con paciencia y tiempo, ganarás su confianza.
-              </Text>
+              </StyledText>
             </View>
           </View>
         </View>
@@ -100,82 +101,82 @@ export default function Adopt() {
         {/* Suelo y Manta */}
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
-            <Text style={styles.sectionIcon}>🛏️</Text>
-            <Text style={styles.sectionTitle}>Suelo del Hábitat</Text>
+            <StyledText style={styles.sectionIcon}>🛏️</StyledText>
+            <StyledText variant="title" style={styles.sectionTitle}>Suelo del Hábitat</StyledText>
           </View>
           
           <View style={styles.card}>
-            <Text style={styles.paragraph}>
-              El suelo debe tener una <Text style={styles.bold}>manta acolchonada y 
-              absorbente</Text>. Esto previene la pododermatitis (lesiones en las patas) 
+            <StyledText style={styles.paragraph}>
+              El suelo debe tener una <StyledText style={styles.bold}>manta acolchonada y 
+              absorbente</StyledText>. Esto previene la pododermatitis (lesiones en las patas) 
               y mantiene limpio el hábitat.
-            </Text>
+            </StyledText>
 
             <View style={styles.tipBox}>
-              <Text style={styles.tipTitle}>Mantenimiento de la Manta</Text>
-              <Text style={styles.tipText}>
+              <StyledText style={styles.tipTitle}>Mantenimiento de la Manta</StyledText>
+              <StyledText style={styles.tipText}>
                 Barrer cacas cada 1-2 días. Cambiar manta completa cada semana. Si es de buena calidad puede durar hasta 1 semana en condiciones.
-              </Text>
+              </StyledText>
             </View>
 
-            <Text style={styles.highlightText}>
+            <StyledText style={styles.highlightText}>
               ⚠️ Nunca uses viruta de pino o cedro - son tóxicas para los cobayos
-            </Text>
+            </StyledText>
           </View>
         </View>
 
         {/* Alimentación */}
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
-            <Text style={styles.sectionIcon}>🌾</Text>
-            <Text style={styles.sectionTitle}>Alimentación Básica</Text>
+            <StyledText style={styles.sectionIcon}>🌾</StyledText>
+            <StyledText variant="title" style={styles.sectionTitle}>Alimentación Básica</StyledText>
           </View>
           
           <View style={styles.card}>
             <View style={styles.dietBox}>
-              <Text style={styles.dietPercentage}>80%</Text>
-              <Text style={styles.dietItem}>HENO</Text>
-              <Text style={styles.dietDescription}>
+              <StyledText style={styles.dietPercentage}>80%</StyledText>
+              <StyledText style={styles.dietItem}>HENO</StyledText>
+              <StyledText style={styles.dietDescription}>
                 Debe estar disponible las 24 horas
-              </Text>
+              </StyledText>
             </View>
 
             <View style={styles.dietBox}>
-              <Text style={styles.dietPercentage}>15%</Text>
-              <Text style={styles.dietItem}>VERDURAS</Text>
-              <Text style={styles.dietDescription}>
+              <StyledText style={styles.dietPercentage}>15%</StyledText>
+              <StyledText style={styles.dietItem}>VERDURAS</StyledText>
+              <StyledText style={styles.dietDescription}>
                 Variedad de vegetales frescos
-              </Text>
+              </StyledText>
             </View>
 
             <View style={styles.dietBox}>
-              <Text style={styles.dietPercentage}>5%</Text>
-              <Text style={styles.dietItem}>PELLETS</Text>
-              <Text style={styles.dietDescription}>
+              <StyledText style={styles.dietPercentage}>5%</StyledText>
+              <StyledText style={styles.dietItem}>PELLETS</StyledText>
+              <StyledText style={styles.dietDescription}>
                 Alimento balanceado específico
-              </Text>
+              </StyledText>
             </View>
 
             <TouchableOpacity 
               style={styles.linkButton}
               onPress={() => navigateTo('Henos')}
             >
-              <Text style={styles.linkButtonText}>Ver tipos de Heno →</Text>
+              <StyledText style={styles.linkButtonText}>Ver tipos de Heno →</StyledText>
             </TouchableOpacity>
 
             <TouchableOpacity 
               style={styles.linkButton}
               onPress={() => navigateTo('Alimentacion')}
             >
-              <Text style={styles.linkButtonText}>Ver verduras permitidas →</Text>
+              <StyledText style={styles.linkButtonText}>Ver verduras permitidas →</StyledText>
             </TouchableOpacity>
 
             <View style={styles.warningBox}>
-              <Text style={styles.warningIcon}>💧</Text>
-              <Text style={styles.warningText}>
-                <Text style={styles.bold}>Agua:</Text> Debe tener acceso ilimitado 
+              <StyledText style={styles.warningIcon}>💧</StyledText>
+              <StyledText style={styles.warningText}>
+                <StyledText style={styles.bold}>Agua:</StyledText> Debe tener acceso ilimitado 
                 a agua fresca. Podés usar bebedero o plato limpiándolo diariamente.
-              </Text>
+              </StyledText>
             </View>
           </View>
         </View>
@@ -183,36 +184,36 @@ export default function Adopt() {
         {/* Temperatura */}
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
-            <Text style={styles.sectionIcon}>🌡️</Text>
-            <Text style={styles.sectionTitle}>Control de Temperatura</Text>
+            <StyledText style={styles.sectionIcon}>🌡️</StyledText>
+            <StyledText variant="title" style={styles.sectionTitle}>Control de Temperatura</StyledText>
           </View>
           
           <View style={styles.card}>
-            <Text style={styles.paragraph}>
+            <StyledText style={styles.paragraph}>
               Los cobayos son sensibles a temperaturas extremas. El rango ideal es 
-              <Text style={styles.bold}> 18°C a 24°C</Text>.
-            </Text>
+              <StyledText style={styles.bold}> 18°C a 24°C</StyledText>.
+            </StyledText>
 
             <View style={styles.tempBox}>
-              <Text style={styles.tempIcon}>❄️</Text>
+              <StyledText style={styles.tempIcon}>❄️</StyledText>
               <View style={styles.tempContent}>
-                <Text style={styles.tempTitle}>Si hace frío</Text>
-                <Text style={styles.tempText}>
+                <StyledText style={styles.tempTitle}>Si hace frío</StyledText>
+                <StyledText style={styles.tempText}>
                   Comprale una casita tipo "cunita" o iglú donde puedan refugiarse 
                   y mantenerse calentitos.
-                </Text>
+                </StyledText>
               </View>
             </View>
 
             <View style={styles.tempBox}>
-              <Text style={styles.tempIcon}>🔥</Text>
+              <StyledText style={styles.tempIcon}>🔥</StyledText>
               <View style={styles.tempContent}>
-                <Text style={styles.tempTitle}>Si hace calor</Text>
-                <Text style={styles.tempText}>
+                <StyledText style={styles.tempTitle}>Si hace calor</StyledText>
+                <StyledText style={styles.tempText}>
                   NO dejes que se cubran con mantas, aunque ellos lo intenten. 
                   Pueden sufrir un golpe de calor. Mantené el ambiente fresco 
                   y con ventilación.
-                </Text>
+                </StyledText>
               </View>
             </View>
           </View>
@@ -221,30 +222,30 @@ export default function Adopt() {
         {/* Salud */}
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
-            <Text style={styles.sectionIcon}>🏥</Text>
-            <Text style={styles.sectionTitle}>Cuidados Veterinarios</Text>
+            <StyledText style={styles.sectionIcon}>🏥</StyledText>
+            <StyledText variant="title" style={styles.sectionTitle}>Cuidados Veterinarios</StyledText>
           </View>
           
           <View style={styles.card}>
-            <Text style={styles.paragraph}>
-              Es fundamental encontrar un <Text style={styles.bold}>veterinario 
-              especializado en animales exóticos</Text> antes de adoptar. Los cobayos 
+            <StyledText style={styles.paragraph}>
+              Es fundamental encontrar un <StyledText style={styles.bold}>veterinario 
+              especializado en animales exóticos</StyledText> antes de adoptar. Los cobayos 
               pueden enfermar rápidamente y necesitan atención especializada.
-            </Text>
+            </StyledText>
 
             <TouchableOpacity 
               style={[styles.linkButton, styles.linkButtonHealth]}
               onPress={() => navigateTo('Salud')}
             >
-              <Text style={styles.linkButtonText}>Ver enfermedades comunes →</Text>
+              <StyledText style={styles.linkButtonText}>Ver enfermedades comunes →</StyledText>
             </TouchableOpacity>
 
             <View style={styles.warningBox}>
-              <Text style={styles.warningIcon}>⚠️</Text>
-              <Text style={styles.warningText}>
+              <StyledText style={styles.warningIcon}>⚠️</StyledText>
+              <StyledText style={styles.warningText}>
                 Los cobayos esconden muy bien sus síntomas. Cualquier cambio en 
                 comportamiento, apetito o energía debe ser consultado inmediatamente.
-              </Text>
+              </StyledText>
             </View>
           </View>
         </View>
@@ -255,46 +256,46 @@ export default function Adopt() {
             colors={['#fef3c7', '#fde68a']}
             style={styles.checklistCard}
           >
-            <Text style={styles.checklistTitle}>Checklist antes de adoptar</Text>
+            <StyledText variant="title" style={styles.checklistTitle}>Checklist antes de adoptar</StyledText>
             
             <View style={styles.checklistItem}>
-              <Text style={styles.checklistIcon}>✓</Text>
-              <Text style={styles.checklistText}>Hábitat de tamaño adecuado</Text>
+              <StyledText style={styles.checklistIcon}>✓</StyledText>
+              <StyledText style={styles.checklistText}>Hábitat de tamaño adecuado</StyledText>
             </View>
             
             <View style={styles.checklistItem}>
-              <Text style={styles.checklistIcon}>✓</Text>
-              <Text style={styles.checklistText}>Mantas absorbentes o sustrato apropiado</Text>
+              <StyledText style={styles.checklistIcon}>✓</StyledText>
+              <StyledText style={styles.checklistText}>Mantas absorbentes o sustrato apropiado</StyledText>
             </View>
             
             <View style={styles.checklistItem}>
-              <Text style={styles.checklistIcon}>✓</Text>
-              <Text style={styles.checklistText}>Heno de calidad disponible</Text>
+              <StyledText style={styles.checklistIcon}>✓</StyledText>
+              <StyledText style={styles.checklistText}>Heno de calidad disponible</StyledText>
             </View>
             
             <View style={styles.checklistItem}>
-              <Text style={styles.checklistIcon}>✓</Text>
-              <Text style={styles.checklistText}>Bebedero o plato para agua</Text>
+              <StyledText style={styles.checklistIcon}>✓</StyledText>
+              <StyledText style={styles.checklistText}>Bebedero o plato para agua</StyledText>
             </View>
             
             <View style={styles.checklistItem}>
-              <Text style={styles.checklistIcon}>✓</Text>
-              <Text style={styles.checklistText}>Veterinario de exóticos localizado</Text>
+              <StyledText style={styles.checklistIcon}>✓</StyledText>
+              <StyledText style={styles.checklistText}>Veterinario de exóticos localizado</StyledText>
             </View>
             
             <View style={styles.checklistItem}>
-              <Text style={styles.checklistIcon}>✓</Text>
-              <Text style={styles.checklistText}>Presupuesto para alimentación y cuidados</Text>
+              <StyledText style={styles.checklistIcon}>✓</StyledText>
+              <StyledText style={styles.checklistText}>Presupuesto para alimentación y cuidados</StyledText>
             </View>
             
             <View style={styles.checklistItem}>
-              <Text style={styles.checklistIcon}>✓</Text>
-              <Text style={styles.checklistText}>Tiempo diario para atención y limpieza</Text>
+              <StyledText style={styles.checklistIcon}>✓</StyledText>
+              <StyledText style={styles.checklistText}>Tiempo diario para atención y limpieza</StyledText>
             </View>
 
-            <Text style={styles.checklistFooter}>
+            <StyledText style={styles.checklistFooter}>
               Si completaste todo, estás listo para darle un hogar a un cobayo
-            </Text>
+            </StyledText>
           </LinearGradient>
         </View>
 

@@ -1,11 +1,10 @@
-import { Button, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { Image } from 'expo-image'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import H1 from './H1'
-import { useNavigation } from '@react-navigation/core'
-import { RootStackParamList } from '@/App'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { Button, StyleSheet, View } from 'react-native';
+import React from 'react';
+import { Image } from 'expo-image';
+import { useNavigation } from '@react-navigation/core';
+import { RootStackParamList } from '@/App';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { StyledText } from './StyledText';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
 
@@ -14,11 +13,11 @@ export default function NotFound() {
 
     return (
         <View style={styles.container}>
-            <H1 content='Sitio en Construcción'></H1>
+            <StyledText variant='title'>Sitio en Construcción</StyledText>
             <Image style={styles.imageNF} source={require('@/assets/images/kuyWorking.png')}></Image>
             <Button title={'Regresar'} onPress={() => navigation.navigate('Home')}></Button>
         </View>
-    )
+    );
 }
 
 const styles = StyleSheet.create({

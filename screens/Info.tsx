@@ -1,9 +1,10 @@
-import React from 'react'
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import { LinearGradient } from 'expo-linear-gradient'
-import HeaderComponent from '@/components/Header'
-import { Image } from 'expo-image'
+import React from 'react';
+import { StyleSheet, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { LinearGradient } from 'expo-linear-gradient';
+import HeaderComponent from '@/components/Header';
+import { Image } from 'expo-image';
+import { StyledText } from '@/components/StyledText';
 
 type DonationButton = {
   platform: string
@@ -50,25 +51,25 @@ export default function Info() {
       >
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
-            <Text style={styles.sectionIcon}>🐹</Text>
-            <Text style={styles.sectionTitle}>KuYi App</Text>
+            <StyledText style={styles.sectionIcon}>🐹</StyledText>
+            <StyledText variant="title" style={styles.sectionTitle}>KuYi App</StyledText>
           </View>
           
           <View style={styles.card}>
-            <Text style={styles.paragraph}>
+            <StyledText style={styles.paragraph}>
               KuYi nació debido a la necesidad y a la falta de lugares confiables dónde obtener información a cerca del delicado cuidado de los cobayos.
-            </Text>
-            <Text style={styles.paragraph}>
+            </StyledText>
+            <StyledText style={styles.paragraph}>
               Esta app reúne todo lo necesario en un solo lugar: 
               desde alimentación correcta hasta cómo actuar en emergencias. {'\n'}Espero que sea 
               de ayuda para todos los que aman a estos pequeños compañeros. 🐹💛
-            </Text>
-            <Text style={styles.paragraph}>
+            </StyledText>
+            <StyledText style={styles.paragraph}>
               Y ahora les presento a quienes hicieron que esta aplicación fuera posible...
-            </Text>
-            <Text style={styles.highlightBoldText}>
+            </StyledText>
+            <StyledText style={styles.highlightBoldText}>
               Kumi🐹🪽 y Yuri🐹
-            </Text>
+            </StyledText>
             <Image
                 source={require('@/assets/images/kumiyuri.jpg')}
                 style={styles.kumiYuriImage}
@@ -79,18 +80,18 @@ export default function Info() {
         {/* Sección Donaciones */}
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
-            <Text style={styles.sectionIcon}>💝</Text>
-            <Text style={styles.sectionTitle}>Apoyá el Proyecto</Text>
+            <StyledText style={styles.sectionIcon}>💝</StyledText>
+            <StyledText variant="title" style={styles.sectionTitle}>Apoyá el Proyecto</StyledText>
           </View>
           
           <View style={styles.card}>
-            <Text style={[styles.paragraph, { textAlign: 'justify' }]}>
+            <StyledText style={[styles.paragraph, { textAlign: 'justify' }]}>
               KuYi es una app gratuita y libre de anuncios.
               {'\n'}Si te resulta útil y querés apoyar el desarrollo y mantenimiento de la app, podés realizar una donación.
               {'\n'}¡Cada aporte ayuda a seguir mejorandola! 💛
               {'\n\n'}¡Como agradecimiento a cada donación mi idea es implementar una sección en la cual las fotos de sus Cobis puedan ser parte de la app!
               {'\n\n'}¡Si realizaste una, te pido por favor que me avises por correo con el botón que está más abajo!
-            </Text>
+            </StyledText>
           </View>
 
           <View style={styles.donationButtons}>
@@ -107,8 +108,8 @@ export default function Info() {
                   end={{ x: 1, y: 1 }}
                   style={styles.donationButton}
                 >
-                  <Text style={styles.donationIcon}>{option.icon}</Text>
-                  <Text style={styles.donationText}>{option.platform}</Text>
+                  <StyledText style={styles.donationIcon}>{option.icon}</StyledText>
+                  <StyledText style={styles.donationText}>{option.platform}</StyledText>
                 </LinearGradient>
               </TouchableOpacity>
             ))}
@@ -118,32 +119,32 @@ export default function Info() {
         {/* Sección Contacto */}
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
-            <Text style={styles.sectionIcon}>📬</Text>
-            <Text style={styles.sectionTitle}>Contacto</Text>
+            <StyledText style={styles.sectionIcon}>📬</StyledText>
+            <StyledText variant="title" style={styles.sectionTitle}>Contacto</StyledText>
           </View>
           
           <View style={styles.card}>
-            <Text style={styles.paragraph}>
+            <StyledText style={styles.paragraph}>
               ¿Tenés sugerencias, encontraste algún error o querés aportar información?
-            </Text>
+            </StyledText>
             
             <TouchableOpacity 
               style={styles.contactButton}
               onPress={() => openLink('mailto:fede.osoriog@gmail.com')} // Reemplazar con tu email
             >
-              <Text style={styles.contactButtonText}>📧 Enviar Email</Text>
+              <StyledText style={styles.contactButtonText}>📧 Enviar Email</StyledText>
             </TouchableOpacity>
           </View>
         </View>
 
         {/* Footer */}
         <View style={styles.footer}>
-          <Text style={styles.footerText}>
+          <StyledText style={styles.footerText}>
             Hecho con 💛 para la comunidad de cobayas
-          </Text>
-          <Text style={styles.versionText}>
+          </StyledText>
+          <StyledText style={styles.versionText}>
             Versión 1.0.0
-          </Text>
+          </StyledText>
         </View>
       </ScrollView>
     </SafeAreaView>

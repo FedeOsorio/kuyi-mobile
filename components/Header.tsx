@@ -1,7 +1,11 @@
-import { StyleSheet, Text, View } from 'react-native'
-import { Image } from 'expo-image'
+import { StyleSheet, Text, View } from 'react-native';
+import { Image } from 'expo-image';
+import { useFontScale } from '@/hooks/useFontScale';
 
 export default function HeaderComponent({ title }: { title?: string }) {
+    const fontScale = useFontScale();
+    const titleFontSize = 22 / fontScale;
+
     return (
         <View style={styles.container}>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -12,14 +16,14 @@ export default function HeaderComponent({ title }: { title?: string }) {
                 />
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', minWidth: 0 }}>
                     {title && (
-                        <Text style={styles.title} numberOfLines={1}>
+                        <Text style={[styles.title, { fontSize: titleFontSize }]} numberOfLines={1}>
                             {title}
                         </Text>
                     )}
                 </View>
             </View>
         </View>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
