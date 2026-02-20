@@ -101,23 +101,43 @@ export const healthIssues: HealthIssue[] = [
   },
   {
     id: 'gases',
+    name: 'Gases / Leve',
+    severity: 'medium',
+    category: 'Digestivo',
+    visible: true,
+    images: [require('@/assets/images/health/gases1.jpg'), require('@/assets/images/health/gases2.jpg')],
+    symptoms: [
+      'Abdomen hinchado y duro',
+      'Dolor abdominal',
+      'No come ni bebe',
+      'No defeca',
+      'Chirridos',
+    ],
+    reasons: 'Falta de Heno, dieta inadecuada, exceso de verduras ricas en agua, mucha fruta, pellets bajos en fibra, cambios bruscos en la dieta, estrés, cobayo sedentario.',
+    immediateActions: 'Darle solo heno de pasturas como comida, hacerle masajitos suaves en la panza desde adelante hacia atras para ayudarlo a movilizar el intestino, si el hábitat es muy pequeño y no cumple las medidas recomendadas, el cobayo no camina lo suficiente, debe ampliarlo para que camine más.',
+    prevention: 'Introducir nuevos alimentos gradualmente, no dar verduras en exceso, el 80% de su alimento debe ser Heno de Pasturas.'
+  },
+  {
+    id: 'timpanismo',
     name: 'Gases / Timpanismo',
     severity: 'high',
     category: 'Digestivo',
-    visible: false,
-    images: ['https://example.com/placeholder1.jpg', 'https://example.com/placeholder2.jpg'],
+    visible: true,
+    images: [require('@/assets/images/health/timpanismo1.jpg'), require('@/assets/images/health/timpanismo2.jpg'), require('@/assets/images/health/timpanismo3.jpg')],
     symptoms: [
       'Abdomen hinchado y duro',
       'Dolor abdominal',
       'Postura encorvada',
       'No come ni bebe',
+      'Caca transparente',
+      'Caca con burbujas de aire',
       'No defeca',
       'Gemidos o chirridos de dolor',
-      'Respiración rápida'
+      'Respiración rápida',
     ],
-    reasons: 'Dieta inadecuada (exceso de verduras ricas en agua, frutas, pellets bajos en fibra), cambios bruscos en la dieta, falta de heno, estrés, falta de ejercicio.',
-    immediateActions: 'COMPLETAR: Acciones inmediatas a realizar mientras se consigue turno veterinario',
-    prevention: 'Introducir nuevos alimentos gradualmente, evitar alimentos que producen gases (brócoli, repollo), proporcionar heno ilimitado'
+    reasons: 'Dieta inadecuada, falta de Vitamina C, parásitos, estrés.',
+    immediateActions: 'Si su cobayo tiene gases y le duele, va a verlo en una posición encorvada como la de la foto, esto indica que ya siente mucho dolor, la caca con burbujas de aire es un síntoma de que el gas ya está en el intestino, y es una emergencia, debe ir al veterinario lo antes posible para que le administren un medicamento para aliviar el dolor y el gas, y así evitar que se agrave a un punto crítico.',
+    prevention: 'Desparasitar de forma temprana, brindar una dieta adecuada rica en fibra, evitar cambios bruscos en la dieta, suplementar vitamina C, reducir el estrés, ejercicio diario.'
   },
   {
     id: 'diarrea',
