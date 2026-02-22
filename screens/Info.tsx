@@ -5,6 +5,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import HeaderComponent from '@/components/Header';
 import { Image } from 'expo-image';
 import { StyledText } from '@/components/StyledText';
+import { useFontScale } from '@/hooks/useFontScale';
 
 type DonationButton = {
   platform: string
@@ -14,31 +15,30 @@ type DonationButton = {
 }
 
 const donationOptions: DonationButton[] = [
-   {
+  {
     platform: 'Sitio Web',
     icon: '🌐',
-    url: 'https://fedeosorio.github.io/kuyi-app/', // Reemplazar con tu usuario
+    url: 'https://fedeosorio.github.io/kuyi-app/', 
     color: ['#0070BA', '#1546A0'] as const
   },
-/*   {
-    platform: 'Mercado Pago',
-    icon: '💳',
-    url: 'https://link.mercadopago.com.ar/kuyi', // Reemplazar con tu link
-    color: ['#009EE3', '#00B1EA'] as const
-  },
-  {
-    platform: 'PayPal',
-    icon: '🌐',
-    url: 'https://paypal.me/osoriofederico', // Reemplazar con tu usuario
-    color: ['#0070BA', '#1546A0'] as const
-  } */
 ]
 
 export default function Info() {
+  const fontScale = useFontScale();
+
   const openLink = (url: string) => {
     Linking.openURL(url).catch(() => {
       console.log('No se pudo abrir el link')
     })
+  }
+
+  const getSectionColor = (title: string) => {
+    switch (title) {
+      case 'KuYi App': return '#f59e0b'
+      case 'Apoyá el Proyecto': return '#10b981'
+      case 'Contacto': return '#2563eb'
+      default: return '#6b7280'
+    }
   }
 
   return (
@@ -50,24 +50,24 @@ export default function Info() {
         showsVerticalScrollIndicator={false}
       >
         <View style={styles.section}>
-          <View style={styles.sectionHeader}>
-            <StyledText style={styles.sectionIcon}>🐹</StyledText>
-            <StyledText variant="title" style={styles.sectionTitle}>KuYi App</StyledText>
+          <View style={[styles.sectionHeader, { borderLeftColor: getSectionColor('KuYi App') }]}>
+            <StyledText style={[styles.sectionIcon, { fontSize: 22 / fontScale }]}>🐹</StyledText>
+            <StyledText variant="title" style={[styles.sectionTitle, { color: getSectionColor('KuYi App'), fontSize: 15 / fontScale }]}>KuYi App</StyledText>
           </View>
           
           <View style={styles.card}>
-            <StyledText style={styles.paragraph}>
+            <StyledText style={[styles.paragraph, { fontSize: 12 / fontScale, lineHeight: 22 / fontScale }]}>
               KuYi nació debido a la necesidad y a la falta de lugares confiables dónde obtener información a cerca del delicado cuidado de los cobayos.
             </StyledText>
-            <StyledText style={styles.paragraph}>
+            <StyledText style={[styles.paragraph, { fontSize: 12 / fontScale, lineHeight: 22 / fontScale }]}>
               Esta app reúne todo lo necesario en un solo lugar: 
               desde alimentación correcta hasta cómo actuar en emergencias. {'\n'}Espero que sea 
               de ayuda para todos los que aman a estos pequeños compañeros. 🐹💛
             </StyledText>
-            <StyledText style={styles.paragraph}>
+            <StyledText style={[styles.paragraph, { fontSize: 12 / fontScale, lineHeight: 22 / fontScale }]}>
               Y ahora les presento a quienes hicieron que esta aplicación fuera posible...
             </StyledText>
-            <StyledText style={styles.highlightBoldText}>
+            <StyledText style={[styles.highlightBoldText, { fontSize: 18 / fontScale, lineHeight: 22 / fontScale }]}>
               Kumi🐹🪽 y Yuri🐹
             </StyledText>
             <Image
@@ -79,13 +79,13 @@ export default function Info() {
 
         {/* Sección Donaciones */}
         <View style={styles.section}>
-          <View style={styles.sectionHeader}>
-            <StyledText style={styles.sectionIcon}>💝</StyledText>
-            <StyledText variant="title" style={styles.sectionTitle}>Apoyá el Proyecto</StyledText>
+          <View style={[styles.sectionHeader, { borderLeftColor: getSectionColor('Apoyá el Proyecto') }]}>
+            <StyledText style={[styles.sectionIcon, { fontSize: 22 / fontScale }]}>💝</StyledText>
+            <StyledText variant="title" style={[styles.sectionTitle, { color: getSectionColor('Apoyá el Proyecto'), fontSize: 15 / fontScale }]}>Apoyá el Proyecto</StyledText>
           </View>
           
           <View style={styles.card}>
-            <StyledText style={[styles.paragraph, { textAlign: 'justify' }]}>
+            <StyledText style={[styles.paragraph, { textAlign: 'justify', fontSize: 12 / fontScale, lineHeight: 22 / fontScale }]}>
               KuYi es una app gratuita y libre de anuncios.
               {'\n'}Si te resulta útil y querés apoyar el desarrollo y mantenimiento de la app, podés realizar una donación.
               {'\n'}¡Cada aporte ayuda a seguir mejorandola! 💛
@@ -108,8 +108,8 @@ export default function Info() {
                   end={{ x: 1, y: 1 }}
                   style={styles.donationButton}
                 >
-                  <StyledText style={styles.donationIcon}>{option.icon}</StyledText>
-                  <StyledText style={styles.donationText}>{option.platform}</StyledText>
+                  <StyledText style={[styles.donationIcon, { fontSize: 22 / fontScale, lineHeight: 32 / fontScale}]}>{option.icon}</StyledText>
+                  <StyledText style={[styles.donationText, { fontSize: 17 / fontScale }]}>{option.platform}</StyledText>
                 </LinearGradient>
               </TouchableOpacity>
             ))}
@@ -118,31 +118,31 @@ export default function Info() {
 
         {/* Sección Contacto */}
         <View style={styles.section}>
-          <View style={styles.sectionHeader}>
-            <StyledText style={styles.sectionIcon}>📬</StyledText>
-            <StyledText variant="title" style={styles.sectionTitle}>Contacto</StyledText>
+          <View style={[styles.sectionHeader, { borderLeftColor: getSectionColor('Contacto') }]}>
+            <StyledText style={[styles.sectionIcon, { fontSize: 22 / fontScale }]}>📬</StyledText>
+            <StyledText variant="title" style={[styles.sectionTitle, { color: getSectionColor('Contacto'), fontSize: 15 / fontScale }]}>Contacto</StyledText>
           </View>
           
           <View style={styles.card}>
-            <StyledText style={styles.paragraph}>
+            <StyledText style={[styles.paragraph, { fontSize: 12 / fontScale, lineHeight: 22 / fontScale }]}>
               ¿Tenés sugerencias, encontraste algún error o querés aportar información?
             </StyledText>
             
             <TouchableOpacity 
               style={styles.contactButton}
-              onPress={() => openLink('mailto:fede.osoriog@gmail.com')} // Reemplazar con tu email
+              onPress={() => openLink('mailto:fede.osoriog@gmail.com')} 
             >
-              <StyledText style={styles.contactButtonText}>📧 Enviar Email</StyledText>
+              <StyledText style={[styles.contactButtonText, { fontSize: 13 / fontScale }]}>📧 Enviar Email</StyledText>
             </TouchableOpacity>
           </View>
         </View>
 
         {/* Footer */}
         <View style={styles.footer}>
-          <StyledText style={styles.footerText}>
+          <StyledText style={[styles.footerText, { fontSize: 12 / fontScale }]}>
             Hecho con 💛 para la comunidad de cobayas
           </StyledText>
-          <StyledText style={styles.versionText}>
+          <StyledText style={[styles.versionText, { fontSize: 12 / fontScale }]}>
             Versión 1.0.0
           </StyledText>
         </View>
@@ -157,34 +157,30 @@ const styles = StyleSheet.create({
     backgroundColor: '#fffaef',
   },
   content: {
-    paddingHorizontal: 16,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
   },
   section: {
+    marginBottom: 12,
   },
   sectionHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 8,
-    marginBottom: 8,
   },
   sectionIcon: {
-    fontSize: 24,
     marginRight: 8,
-    lineHeight: 24,
     textAlignVertical: 'center',
   },
   sectionTitle: {
-    fontFamily: 'Poppins_600SemiBold',
-    fontSize: 17,
-    color: '#78350f',
-    lineHeight: 24,
+    fontFamily: 'Poppins_800ExtraBold',
+    letterSpacing: 0.5,
     textAlignVertical: 'center',
   },
   card: {
     backgroundColor: '#fff',
-    borderRadius: 16,
+    borderRadius: 10,
     gap: 10,
-    padding: 16,
+    padding: 20,
     elevation: 2,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
@@ -192,29 +188,24 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
   },
   paragraph: {
-    fontSize: 12,
     fontFamily: 'Poppins_400Regular',
+    fontSize: 12,
     color: '#451a03',
-    lineHeight: 22
   },
   highlightText: {
-    fontSize: 12,
     fontFamily: 'Poppins_500Medium',
     color: '#78350f',
-    lineHeight: 22,
     fontStyle: 'italic',
   },
-    highlightBoldText: {
+  highlightBoldText: {
     fontFamily: 'Poppins_600SemiBold',
-    fontSize: 18,
     textAlign: 'center',
     color: '#78350f',
-    lineHeight: 22,
   },
   kumiYuriImage: {
     width: '100%',
     height: 200,
-    borderRadius: 12,
+    borderRadius: 10,
   },
   donationButtons: {
     marginTop: 12,
@@ -233,53 +224,47 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 16,
-    paddingHorizontal: 20,
-    minHeight: 60,
+    paddingVertical: 12, // Reducido de 16
+    paddingHorizontal: 16, // Reducido de 20
+    minHeight: 50, // Reducido de 60
   },
   donationIcon: {
-    fontSize: 24,
     marginRight: 12,
-    lineHeight: 24,
     textAlignVertical: 'center',
   },
   donationText: {
-    fontSize: 17,
     fontFamily: 'Poppins_500Medium',
     color: '#fff',
-    lineHeight: 24,
     textAlignVertical: 'center',
+    lineHeight: 18,
   },
   contactButton: {
     backgroundColor: '#fef3c7',
-    paddingVertical: 14,
-    paddingHorizontal: 20,
+    paddingVertical: 10, // Reducido de 14
+    paddingHorizontal: 16, // Reducido de 20
     borderRadius: 12,
     marginTop: 8,
     borderWidth: 2,
     borderColor: '#fde68a',
   },
   contactButtonText: {
-    fontSize: 13,
     fontFamily: 'Poppins_500Medium',
     color: '#78350f',
     textAlign: 'center',
+    lineHeight: 18,
   },
   footer: {
     alignItems: 'center',
-    marginTop: 24,
+    marginTop: 20,
     paddingVertical: 20,
     borderTopWidth: 1,
     borderTopColor: '#fde68a',
   },
   footerText: {
     fontFamily: 'Poppins_400Regular',
-    fontSize: 12,
     color: '#92400e',
-    marginBottom: 4,
   },
   versionText: {
-    fontSize: 12,
     fontFamily: 'Poppins_400Regular',
     color: '#92400e',
     opacity: 0.7,

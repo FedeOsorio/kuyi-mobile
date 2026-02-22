@@ -51,7 +51,7 @@ const HayHeader = () => (
 
       <View style={styles.typeItem}>
         <StyledText style={styles.typeTitle}>3 - Heno de Alfalfa</StyledText>
-        <StyledText style={styles.typeDesc}>Complementario en cobayas bebés (0 a 6 meses), embarazadas o en recuperación.{'\n'}</StyledText>
+        <StyledText style={styles.typeDesc}>Complementario en cobayas bebés (0 a 6 meses), embarazadas o en recuperación.</StyledText>
         <StyledText style={styles.typeDesc}>En la dieta acompaña al heno de pasturas, pero no lo reemplaza.</StyledText>
         <View style={styles.warningBox}>
           <StyledText style={styles.warningText}>🚨 <StyledText style={styles.bold}>Advertencia:</StyledText> No debe darse diariamente en grandes cantidades por su alto contenido de calcio (riesgo de cálculos renales). Es un complemento.</StyledText>
@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#ffcdd2'
   },
-  warningText: { fontSize: 13, color: '#b71c1c', lineHeight: 18 },
+  warningText: { fontSize: 12, color: '#b71c1c', lineHeight: 18 },
   rowWrapper: { justifyContent: 'space-between' },
   card: {
     backgroundColor: '#fff',
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
   },
   image: { width: '100%', height: 110 },
   cardInfo: { padding: 10, alignItems: 'center' },
-  name: { fontFamily: 'Poppins_600SemiBold', fontSize: 13, textAlign: 'center', color: '#333', marginBottom: 6 },
+  name: { fontFamily: 'Poppins_600SemiBold', fontSize: 13, textAlign: 'center', color: '#333', marginBottom: 2 },
   badge: { paddingHorizontal: 8, paddingVertical: 4, borderRadius: 8 },
-  badgeText: { fontFamily: 'Poppins_500Medium', fontSize: 9 }
+  badgeText: { fontFamily: 'Poppins_500Medium', fontSize: 9, lineHeight: 14, textTransform: 'uppercase' },
 });
