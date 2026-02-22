@@ -7,14 +7,28 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '@/App';
 import { StyledText } from '@/components/StyledText';
+import { useFontScale } from '@/hooks/useFontScale';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>
 
 export default function Adopt() {
   const navigation = useNavigation<NavigationProp>()
+  const fontScale = useFontScale();
 
   const navigateTo = (screen: keyof RootStackParamList) => {
     navigation.navigate(screen)
+  }
+
+  const getSectionColor = (title: string) => {
+    switch (title) {
+      case 'Tamaño del Hábitat': return '#2563eb'
+      case '¿Uno o Dos?': return '#f59e0b'
+      case 'Suelo del Hábitat': return '#10b981'
+      case 'Alimentación Básica': return '#8b5cf6'
+      case 'Control de Temperatura': return '#06b6d4'
+      case 'Cuidados Veterinarios': return '#dc2626'
+      default: return '#6b7280'
+    }
   }
 
   return (
@@ -27,8 +41,8 @@ export default function Adopt() {
       >
         {/* Intro */}
         <View style={styles.introSection}>
-          <StyledText variant="title" style={styles.introTitle}>¿Pensando en adoptar?</StyledText>
-          <StyledText style={styles.introText}>
+          <StyledText variant="title" style={[styles.introTitle, { fontSize: 16 / fontScale }]}>¿Pensando en adoptar?</StyledText>
+          <StyledText style={[styles.introText, { fontSize: 12 / fontScale, lineHeight: 22 / fontScale }]}>
             Antes de adoptar un cobayo, es importante conocer sus necesidades básicas 
             para asegurar su bienestar.
           </StyledText>
@@ -36,24 +50,24 @@ export default function Adopt() {
 
         {/* Hábitat */}
         <View style={styles.section}>
-          <View style={styles.sectionHeader}>
-            <StyledText variant="title" style={styles.sectionTitle}>Tamaño del Hábitat</StyledText>
+          <View style={[styles.sectionHeader, { borderLeftColor: getSectionColor('Tamaño del Hábitat') }]}>
+            <StyledText style={[styles.sectionTitle, { color: getSectionColor('Tamaño del Hábitat'), fontSize: 15 / fontScale }]}>Tamaño del Hábitat</StyledText>
           </View>
           
           <View style={styles.card}>
             <View style={styles.habitatBox}>
-              <StyledText style={styles.habitatTitle}>Para 1 cobayo</StyledText>
-              <StyledText style={styles.habitatSize}>70cm × 105cm</StyledText>
-              <StyledText style={styles.habitatSubtext}>Mínimo recomendado</StyledText>
+              <StyledText style={[styles.habitatTitle, { fontSize: 14 / fontScale }]}>Para 1 cobayo</StyledText>
+              <StyledText style={[styles.habitatSize, { fontSize: 20 / fontScale }]}>70cm × 105cm</StyledText>
+              <StyledText style={[styles.habitatSubtext, { fontSize: 12 / fontScale }]}>Mínimo recomendado</StyledText>
             </View>
 
             <View style={[styles.habitatBox, styles.habitatBoxHighlight]}>
-              <StyledText style={styles.habitatTitle}>Para 2 cobayos (Recomendado)</StyledText>
-              <StyledText style={styles.habitatSize}>70cm × 140cm</StyledText>
-              <StyledText style={styles.habitatSubtext}>Opción ideal</StyledText>
+              <StyledText style={[styles.habitatTitle, { fontSize: 14 / fontScale }]}>Para 2 cobayos (Recomendado)</StyledText>
+              <StyledText style={[styles.habitatSize, { fontSize: 20 / fontScale }]}>70cm × 140cm</StyledText>
+              <StyledText style={[styles.habitatSubtext, { fontSize: 12 / fontScale }]}>Opción ideal</StyledText>
             </View>
 
-            <StyledText style={styles.paragraph}>
+            <StyledText style={[styles.paragraph, { fontSize: 12 / fontScale, lineHeight: 22 / fontScale }]}>
               <StyledText style={styles.bold}>Tip:</StyledText> Podés armar el hábitat con paneles 
               modulares tipo C&C (Cubes & Coroplast), son económicos y personalizables.
             </StyledText>
@@ -62,34 +76,33 @@ export default function Adopt() {
 
         {/* Compañía */}
         <View style={styles.section}>
-          <View style={styles.sectionHeader}>
-            <StyledText style={styles.sectionIcon}>🐹</StyledText>
-            <StyledText variant="title" style={styles.sectionTitle}>¿Uno o Dos?</StyledText>
+          <View style={[styles.sectionHeader, { borderLeftColor: getSectionColor('¿Uno o Dos?') }]}>
+            <StyledText style={[styles.sectionTitle, { color: getSectionColor('¿Uno o Dos?'), fontSize: 15 / fontScale }]}>¿Uno o Dos?</StyledText>
           </View>
           
           <View style={styles.card}>
-            <StyledText style={styles.paragraph}>
+            <StyledText style={[styles.paragraph, { fontSize: 12 / fontScale, lineHeight: 22 / fontScale }]}>
               <StyledText style={styles.bold}>Lo ideal son 2 cobayos</StyledText> del mismo sexo, 
               ya que son animales muy sociales y disfrutan de la compañía de su especie.
             </StyledText>
 
             <View style={styles.infoBox}>
-              <StyledText style={styles.infoBoxTitle}>Hembras</StyledText>
-              <StyledText style={styles.infoBoxText}>
+              <StyledText style={[styles.infoBoxTitle, { fontSize: 12 / fontScale }]}>Hembras</StyledText>
+              <StyledText style={[styles.infoBoxText, { fontSize: 12 / fontScale, lineHeight: 22 / fontScale }]}>
                 Se adaptan mejor en pareja. Son más independientes del humano e ideales si buscás tranquilidad.
               </StyledText>
             </View>
 
             <View style={styles.infoBox}>
-              <StyledText style={styles.infoBoxTitle}>Machos</StyledText>
-              <StyledText style={styles.infoBoxText}>
+              <StyledText style={[styles.infoBoxTitle, { fontSize: 12 / fontScale }]}>Machos</StyledText>
+              <StyledText style={[styles.infoBoxText, { fontSize: 12 / fontScale, lineHeight: 22 / fontScale }]}>
                 Pueden vivir solos más fácilmente. Son más apegados al humano y buscan más interacción.
               </StyledText>
             </View>
 
             <View style={styles.warningBox}>
-              <StyledText style={styles.warningIcon}>💡</StyledText>
-              <StyledText style={styles.warningText}>
+              <StyledText style={[styles.warningIcon, { fontSize: 15 / fontScale }]}>💡</StyledText>
+              <StyledText style={[styles.warningText, { fontSize: 12 / fontScale, lineHeight: 22 / fontScale }]}>
                 <StyledText style={styles.bold}>Recordá:</StyledText> Si tu cobayo huye cuando 
                 te acercás, no es porque no te quiera. Es su instinto natural de 
                 supervivencia ante movimientos bruscos. Con paciencia y tiempo, ganarás su confianza.
@@ -100,26 +113,25 @@ export default function Adopt() {
 
         {/* Suelo y Manta */}
         <View style={styles.section}>
-          <View style={styles.sectionHeader}>
-            <StyledText style={styles.sectionIcon}>🛏️</StyledText>
-            <StyledText variant="title" style={styles.sectionTitle}>Suelo del Hábitat</StyledText>
+          <View style={[styles.sectionHeader, { borderLeftColor: getSectionColor('Suelo del Hábitat') }]}>
+            <StyledText style={[styles.sectionTitle, { color: getSectionColor('Suelo del Hábitat'), fontSize: 15 / fontScale }]}>Suelo del Hábitat</StyledText>
           </View>
           
           <View style={styles.card}>
-            <StyledText style={styles.paragraph}>
+            <StyledText style={[styles.paragraph, { fontSize: 12 / fontScale, lineHeight: 22 / fontScale }]}>
               El suelo debe tener una <StyledText style={styles.bold}>manta acolchonada y 
               absorbente</StyledText>. Esto previene la pododermatitis (lesiones en las patas) 
               y mantiene limpio el hábitat.
             </StyledText>
 
             <View style={styles.tipBox}>
-              <StyledText style={styles.tipTitle}>Mantenimiento de la Manta</StyledText>
-              <StyledText style={styles.tipText}>
+              <StyledText style={[styles.tipTitle, { fontSize: 12 / fontScale }]}>Mantenimiento de la Manta</StyledText>
+              <StyledText style={[styles.tipText, { fontSize: 12 / fontScale, lineHeight: 22 / fontScale }]}>
                 Barrer cacas cada 1-2 días. Cambiar manta completa cada semana. Si es de buena calidad puede durar hasta 1 semana en condiciones.
               </StyledText>
             </View>
 
-            <StyledText style={styles.highlightText}>
+            <StyledText style={[styles.highlightText, { fontSize: 12 / fontScale }]}>
               ⚠️ Nunca uses viruta de pino o cedro - son tóxicas para los cobayos
             </StyledText>
           </View>
@@ -127,32 +139,31 @@ export default function Adopt() {
 
         {/* Alimentación */}
         <View style={styles.section}>
-          <View style={styles.sectionHeader}>
-            <StyledText style={styles.sectionIcon}>🌾</StyledText>
-            <StyledText variant="title" style={styles.sectionTitle}>Alimentación Básica</StyledText>
+          <View style={[styles.sectionHeader, { borderLeftColor: getSectionColor('Alimentación Básica') }]}>
+            <StyledText style={[styles.sectionTitle, { color: getSectionColor('Alimentación Básica'), fontSize: 15 / fontScale }]}>Alimentación Básica</StyledText>
           </View>
           
           <View style={styles.card}>
             <View style={styles.dietBox}>
-              <StyledText style={styles.dietPercentage}>80%</StyledText>
-              <StyledText style={styles.dietItem}>HENO</StyledText>
-              <StyledText style={styles.dietDescription}>
+              <StyledText style={[styles.dietPercentage, { fontSize: 32 / fontScale }]}>80%</StyledText>
+              <StyledText style={[styles.dietItem, { fontSize: 12 / fontScale }]}>HENO</StyledText>
+              <StyledText style={[styles.dietDescription, { fontSize: 12 / fontScale }]}>
                 Debe estar disponible las 24 horas
               </StyledText>
             </View>
 
             <View style={styles.dietBox}>
-              <StyledText style={styles.dietPercentage}>15%</StyledText>
-              <StyledText style={styles.dietItem}>VERDURAS</StyledText>
-              <StyledText style={styles.dietDescription}>
+              <StyledText style={[styles.dietPercentage, { fontSize: 32 / fontScale }]}>15%</StyledText>
+              <StyledText style={[styles.dietItem, { fontSize: 13 / fontScale }]}>VERDURAS</StyledText>
+              <StyledText style={[styles.dietDescription, { fontSize: 12 / fontScale }]}>
                 Variedad de vegetales frescos
               </StyledText>
             </View>
 
             <View style={styles.dietBox}>
-              <StyledText style={styles.dietPercentage}>5%</StyledText>
-              <StyledText style={styles.dietItem}>PELLETS</StyledText>
-              <StyledText style={styles.dietDescription}>
+              <StyledText style={[styles.dietPercentage, { fontSize: 32 / fontScale }]}>5%</StyledText>
+              <StyledText style={[styles.dietItem, { fontSize: 13 / fontScale }]}>PELLETS</StyledText>
+              <StyledText style={[styles.dietDescription, { fontSize: 12 / fontScale }]}>
                 Alimento balanceado específico
               </StyledText>
             </View>
@@ -161,19 +172,19 @@ export default function Adopt() {
               style={styles.linkButton}
               onPress={() => navigateTo('Henos')}
             >
-              <StyledText style={styles.linkButtonText}>Ver tipos de Heno →</StyledText>
+              <StyledText style={[styles.linkButtonText, { fontSize: 13 / fontScale }]}>Ver tipos de Heno →</StyledText>
             </TouchableOpacity>
 
             <TouchableOpacity 
               style={styles.linkButton}
               onPress={() => navigateTo('Alimentacion')}
             >
-              <StyledText style={styles.linkButtonText}>Ver verduras permitidas →</StyledText>
+              <StyledText style={[styles.linkButtonText, { fontSize: 13 / fontScale }]}>Ver verduras permitidas →</StyledText>
             </TouchableOpacity>
 
             <View style={styles.warningBox}>
-              <StyledText style={styles.warningIcon}>💧</StyledText>
-              <StyledText style={styles.warningText}>
+              <StyledText style={[styles.warningIcon, { fontSize: 15 / fontScale }]}>💧</StyledText>
+              <StyledText style={[styles.warningText, { fontSize: 12 / fontScale, lineHeight: 22 / fontScale }]}>
                 <StyledText style={styles.bold}>Agua:</StyledText> Debe tener acceso ilimitado 
                 a agua fresca. Podés usar bebedero o plato limpiándolo diariamente.
               </StyledText>
@@ -183,22 +194,21 @@ export default function Adopt() {
 
         {/* Temperatura */}
         <View style={styles.section}>
-          <View style={styles.sectionHeader}>
-            <StyledText style={styles.sectionIcon}>🌡️</StyledText>
-            <StyledText variant="title" style={styles.sectionTitle}>Control de Temperatura</StyledText>
+          <View style={[styles.sectionHeader, { borderLeftColor: getSectionColor('Control de Temperatura') }]}>
+            <StyledText style={[styles.sectionTitle, { color: getSectionColor('Control de Temperatura'), fontSize: 15 / fontScale }]}>Control de Temperatura</StyledText>
           </View>
           
           <View style={styles.card}>
-            <StyledText style={styles.paragraph}>
-              Los cobayos son sensibles a temperaturas extremas. El rango ideal es 
+            <StyledText style={[styles.paragraph, { fontSize: 12 / fontScale, lineHeight: 22 / fontScale }]}>
+              Los cobayos son sensibles a temperaturas extremas. El rango ideal es
               <StyledText style={styles.bold}> 18°C a 24°C</StyledText>.
             </StyledText>
 
             <View style={styles.tempBox}>
-              <StyledText style={styles.tempIcon}>❄️</StyledText>
+              <StyledText style={[styles.tempIcon, { fontSize: 30 / fontScale }]}>❄️</StyledText>
               <View style={styles.tempContent}>
-                <StyledText style={styles.tempTitle}>Si hace frío</StyledText>
-                <StyledText style={styles.tempText}>
+                <StyledText style={[styles.tempTitle, { fontSize: 12 / fontScale }]}>Si hace frío</StyledText>
+                <StyledText style={[styles.tempText, { fontSize: 12 / fontScale, lineHeight: 22 / fontScale }]}>
                   Comprale una casita tipo "cunita" o iglú donde puedan refugiarse 
                   y mantenerse calentitos.
                 </StyledText>
@@ -206,10 +216,10 @@ export default function Adopt() {
             </View>
 
             <View style={styles.tempBox}>
-              <StyledText style={styles.tempIcon}>🔥</StyledText>
+              <StyledText style={[styles.tempIcon, { fontSize: 30 / fontScale }]}>🔥</StyledText>
               <View style={styles.tempContent}>
-                <StyledText style={styles.tempTitle}>Si hace calor</StyledText>
-                <StyledText style={styles.tempText}>
+                <StyledText style={[styles.tempTitle, { fontSize: 12 / fontScale }]}>Si hace calor</StyledText>
+                <StyledText style={[styles.tempText, { fontSize: 12 / fontScale, lineHeight: 22 / fontScale }]}>
                   NO dejes que se cubran con mantas, aunque ellos lo intenten. 
                   Pueden sufrir un golpe de calor. Mantené el ambiente fresco 
                   y con ventilación.
@@ -221,13 +231,12 @@ export default function Adopt() {
 
         {/* Salud */}
         <View style={styles.section}>
-          <View style={styles.sectionHeader}>
-            <StyledText style={styles.sectionIcon}>🏥</StyledText>
-            <StyledText variant="title" style={styles.sectionTitle}>Cuidados Veterinarios</StyledText>
+          <View style={[styles.sectionHeader, { borderLeftColor: getSectionColor('Cuidados Veterinarios') }]}>
+            <StyledText style={[styles.sectionTitle, { color: getSectionColor('Cuidados Veterinarios'), fontSize: 15 / fontScale }]}>Cuidados Veterinarios</StyledText>
           </View>
           
           <View style={styles.card}>
-            <StyledText style={styles.paragraph}>
+            <StyledText style={[styles.paragraph, { fontSize: 12 / fontScale, lineHeight: 22 / fontScale }]}>
               Es fundamental encontrar un <StyledText style={styles.bold}>veterinario 
               especializado en animales exóticos</StyledText> antes de adoptar. Los cobayos 
               pueden enfermar rápidamente y necesitan atención especializada.
@@ -237,12 +246,12 @@ export default function Adopt() {
               style={[styles.linkButton, styles.linkButtonHealth]}
               onPress={() => navigateTo('Salud')}
             >
-              <StyledText style={styles.linkButtonText}>Ver enfermedades comunes →</StyledText>
+              <StyledText style={[styles.linkButtonText, { fontSize: 13 / fontScale }]}>Ver enfermedades comunes →</StyledText>
             </TouchableOpacity>
 
             <View style={styles.warningBox}>
-              <StyledText style={styles.warningIcon}>⚠️</StyledText>
-              <StyledText style={styles.warningText}>
+              <StyledText style={[styles.warningIcon, { fontSize: 15 / fontScale }]}>⚠️</StyledText>
+              <StyledText style={[styles.warningText, { fontSize: 12 / fontScale, lineHeight: 22 / fontScale }]}>
                 Los cobayos esconden muy bien sus síntomas. Cualquier cambio en 
                 comportamiento, apetito o energía debe ser consultado inmediatamente.
               </StyledText>
@@ -256,50 +265,49 @@ export default function Adopt() {
             colors={['#fef3c7', '#fde68a']}
             style={styles.checklistCard}
           >
-            <StyledText variant="title" style={styles.checklistTitle}>Checklist antes de adoptar</StyledText>
+            <StyledText variant="title" style={[styles.checklistTitle, { fontSize: 17 / fontScale }]}>Checklist antes de adoptar</StyledText>
             
             <View style={styles.checklistItem}>
-              <StyledText style={styles.checklistIcon}>✓</StyledText>
-              <StyledText style={styles.checklistText}>Hábitat de tamaño adecuado</StyledText>
+              <StyledText style={[styles.checklistIcon, { fontSize: 20 / fontScale }]}>✓</StyledText>
+              <StyledText style={[styles.checklistText, { fontSize: 12 / fontScale, lineHeight: 22 / fontScale }]}>Hábitat de tamaño adecuado</StyledText>
             </View>
             
             <View style={styles.checklistItem}>
-              <StyledText style={styles.checklistIcon}>✓</StyledText>
-              <StyledText style={styles.checklistText}>Mantas absorbentes o sustrato apropiado</StyledText>
+              <StyledText style={[styles.checklistIcon, { fontSize: 20 / fontScale }]}>✓</StyledText>
+              <StyledText style={[styles.checklistText, { fontSize: 12 / fontScale, lineHeight: 22 / fontScale }]}>Mantas absorbentes o sustrato apropiado</StyledText>
             </View>
             
             <View style={styles.checklistItem}>
-              <StyledText style={styles.checklistIcon}>✓</StyledText>
-              <StyledText style={styles.checklistText}>Heno de calidad disponible</StyledText>
+              <StyledText style={[styles.checklistIcon, { fontSize: 20 / fontScale }]}>✓</StyledText>
+              <StyledText style={[styles.checklistText, { fontSize: 12 / fontScale, lineHeight: 22 / fontScale }]}>Heno de calidad disponible</StyledText>
             </View>
             
             <View style={styles.checklistItem}>
-              <StyledText style={styles.checklistIcon}>✓</StyledText>
-              <StyledText style={styles.checklistText}>Bebedero o plato para agua</StyledText>
+              <StyledText style={[styles.checklistIcon, { fontSize: 20 / fontScale }]}>✓</StyledText>
+              <StyledText style={[styles.checklistText, { fontSize: 12 / fontScale, lineHeight: 22 / fontScale }]}>Bebedero o plato para agua</StyledText>
             </View>
             
             <View style={styles.checklistItem}>
-              <StyledText style={styles.checklistIcon}>✓</StyledText>
-              <StyledText style={styles.checklistText}>Veterinario de exóticos localizado</StyledText>
+              <StyledText style={[styles.checklistIcon, { fontSize: 20 / fontScale }]}>✓</StyledText>
+              <StyledText style={[styles.checklistText, { fontSize: 12 / fontScale, lineHeight: 22 / fontScale }]}>Veterinario de exóticos localizado</StyledText>
             </View>
             
             <View style={styles.checklistItem}>
-              <StyledText style={styles.checklistIcon}>✓</StyledText>
-              <StyledText style={styles.checklistText}>Presupuesto para alimentación y cuidados</StyledText>
+              <StyledText style={[styles.checklistIcon, { fontSize: 20 / fontScale }]}>✓</StyledText>
+              <StyledText style={[styles.checklistText, { fontSize: 12 / fontScale, lineHeight: 22 / fontScale }]}>Presupuesto para alimentación y cuidados</StyledText>
             </View>
             
             <View style={styles.checklistItem}>
-              <StyledText style={styles.checklistIcon}>✓</StyledText>
-              <StyledText style={styles.checklistText}>Tiempo diario para atención y limpieza</StyledText>
+              <StyledText style={[styles.checklistIcon, { fontSize: 20 / fontScale }]}>✓</StyledText>
+              <StyledText style={[styles.checklistText, { fontSize: 12 / fontScale, lineHeight: 22 / fontScale }]}>Tiempo diario para atención y limpieza</StyledText>
             </View>
 
-            <StyledText style={styles.checklistFooter}>
-              Si completaste todo, estás listo para darle un hogar a un cobayo
+            <StyledText style={[styles.checklistFooter, { fontSize: 12 / fontScale }]}>
+              Si completaste todo, estás listo para darle un hogar a un cobayo.
             </StyledText>
           </LinearGradient>
         </View>
 
-        <View style={styles.spacer} />
       </ScrollView>
     </SafeAreaView>
   )
@@ -311,8 +319,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fffaef',
   },
   content: {
-    paddingTop: 20,
-    paddingHorizontal: 16,
+    padding: 20,
+    gap: 10,
   },
   introSection: {
     backgroundColor: '#fff',
@@ -341,21 +349,16 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   sectionHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 10,
-    justifyContent: 'flex-start',
-  },
-  sectionIcon: {
-    fontSize: 22,
-    marginRight: 8,
-    lineHeight: 28,
+    borderLeftWidth: 4,
+    paddingLeft: 12,
+    paddingVertical: 6,
+    marginBottom: 8,
   },
   sectionTitle: {
-    fontFamily: 'Poppins_600SemiBold',
-    fontSize: 17,
-    color: '#78350f',
-    lineHeight: 28,
+    fontSize: 14,
+    lineHeight: 22,
+    letterSpacing: 0.5,
+    fontFamily: 'Poppins_800ExtraBold',
   },
   card: {
     backgroundColor: '#fff',
@@ -467,7 +470,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontFamily: 'Poppins_500Medium',
     color: '#0c4a6e',
-    marginBottom: 8,
+    marginBottom: 4,
   },
   tipText: {
     fontSize: 12,
@@ -490,7 +493,8 @@ const styles = StyleSheet.create({
   },
   dietPercentage: {
     fontSize: 32,
-    marginBottom: -6,
+    lineHeight: 32,
+    marginVertical: 4,
     fontFamily: 'Poppins_600SemiBold',
     color: '#78350f',
   },
@@ -498,13 +502,11 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontFamily: 'Poppins_500Medium',
     color: '#92400e',
-    marginTop: 4,
   },
   dietDescription: {
     fontSize: 12,
     fontFamily: 'Poppins_400Regular',
     color: '#92400e',
-    marginTop: 2,
   },
   linkButton: {
     backgroundColor: '#fef3c7',
@@ -524,6 +526,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins_500Medium',
     color: '#78350f',
     textAlign: 'center',
+    lineHeight: 22,
   },
   tempBox: {
     flexDirection: 'row',
@@ -571,10 +574,12 @@ const styles = StyleSheet.create({
   checklistItem: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginVertical: 1,
   },
   checklistIcon: {
     fontSize: 20,
     marginRight: 12,
+    lineHeight: 22,
     color: '#78350f',
   },
   checklistText: {
@@ -588,11 +593,10 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontFamily: 'Poppins_500Medium',
     color: '#78350f',
-    textAlign: 'center',
-    marginTop: 16,
+    marginTop: 10,
     fontStyle: 'italic',
   },
   spacer: {
-    height: 40,
+    
   },
 })
